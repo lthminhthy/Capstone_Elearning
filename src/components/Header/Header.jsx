@@ -1,9 +1,13 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Transition } from "@headlessui/react";
-import { Input, Space } from 'antd';
+import { Input, Menu, Space } from 'antd';
 import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
 import MenuHeader from '../MenuHeader/MenuHeader';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { layDanhSachKhoaHocAction } from '../../redux/actions/QuanLyKhoaHocAction';
+import _ from 'lodash';
+
 
 // antd
 const { Search } = Input;
@@ -12,8 +16,16 @@ const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
 const Header = () => {
+
+  // const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
+ 
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[])
+  
 
 
   // login/register
@@ -21,11 +33,11 @@ const Header = () => {
     // if (_.isEmpty(userLogin)) {
     return <Fragment>
       <button className="self-center px-8 py-3 rounded  hover:bg-retro-beige hover:text-retro-primary  text-retro-beige font-semibold " onClick={() => {
-        navigate('/login')
-      }}>Login</button>
+        navigate('/dangnhap')
+      }}>Đăng Nhập</button>
       <button className="hover:bg-retro-beige hover:text-retro-primary  text-retro-beige self-center px-8 py-3 font-semibold rounded " onClick={() => {
-        navigate('/register')
-      }}>Register</button>
+        navigate('/dangky')
+      }}>Đăng Ký</button>
     </Fragment>
     // }
     // return <button onClick={() => {
@@ -44,19 +56,31 @@ const Header = () => {
 
   }
 
+  const onSearch = (value) => {
+    console.log("value: ", value);
+
+    // call api layDanhSachKhoaHoc theo ten Khoa Hoc
+    dispatch(layDanhSachKhoaHocAction(value, navigate));
+
+
+  };
+
 
   return (
     <div>
-      <nav className="bg-retro-primary">
+      <nav className="bg-retro-primary h-fit">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <img
-                  className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                  alt="Workflow"
-                />
+                <NavLink to="/">
+                  <img
+                    className="h-8 w-8"
+                    src="https://i.imgur.com/lC22izJ.png"
+                    alt="Workflow"
+                  />
+                </NavLink>
+
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -66,16 +90,34 @@ const Header = () => {
 
 
                 </div>
+
+              </div>
+              <div className="hidden md:block">
+                <div className="ml-10 flex items-baseline space-x-4">
+                  <NavLink className='text-retro-beige hover:text-retro-second'>Tin Tức</NavLink>
+                </div>
+
+              </div>
+              <div className="hidden md:block">
+                <div className="ml-10 flex items-baseline space-x-4">
+                  <NavLink className='text-retro-beige hover:text-retro-second'>Liên Hệ</NavLink>
+                </div>
+
               </div>
             </div>
             <div className=' items-center justify-between md:flex hidden'>
               <div className="relative mx-auto text-retro-primary ">
-                <input className="border-2 w-64 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Nhập khóa học muốn tìm kiếm" />
-                <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
-                  <svg className="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style={{ enableBackground: 'new 0 0 56.966 56.966' }} xmlSpace="preserve" width="512px" height="512px">
-                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-                  </svg>
-                </button>
+                <Space direction="vertical" >
+                  <Search
+                    placeholder="Nhập khóa học cần tìm"
+                    allowClear
+                    onSearch={onSearch}
+                    style={{
+                      width: 304,
+                    }}
+                  />
+                </Space>
+
               </div>
               <div className="items-center flex-shrink-0  flex ml-20">
                 {renderLogin()}
@@ -139,29 +181,36 @@ const Header = () => {
           leaveTo="opacity-0 scale-95"
         >
           {(ref) => (
-            <div className="md:hidden" id="mobile-menu">
-              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-right">
-                {/* <a
-                  href="#"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Danh mục khóa học
-                </a> */}
-                <MenuHeader className='ml-2'></MenuHeader>
+            <div className="md:hidden h-[300px]" id="mobile-menu">
+              <div ref={ref} className="py-4 pb-3 space-y-1 sm:px-3 text-right">
 
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                <MenuHeader className='ml-2 my-10'></MenuHeader>
+      
+                
+                <NavLink
+                  to="/tintuc"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Login
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  Tin Tức
+                </NavLink>
+                <NavLink
+                  to="/lienhe"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Register
-                </a>
+                  Liên Hệ
+                </NavLink>
+                <NavLink
+                  to="/dangnhap"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Đăng Nhập
+                </NavLink>
+                <NavLink
+                  to="/dangky"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Đăng Ký
+                </NavLink>
                 <div className="md:hidden text-right my-5  ">
                   <Space direction="vertical" >
                     <Search

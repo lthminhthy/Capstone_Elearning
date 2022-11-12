@@ -1,10 +1,33 @@
 import { quanLyKhoaHocSerVice } from "../../services/QuanLyKhoaHocService";
-import { SET_DANH_MUC_KHOA_HOC, SET_DANH_SACH_KHOA_HOC, SET_KHOAHOC_DANHMUC } from "./types/QuanLyKhoaHocType";
+import { SET_DANH_MUC_KHOA_HOC, SET_DANH_SACH_KHOA_HOC, SET_KHOAHOC_DANHMUC, SET_THONGTIN_KHOAHOC } from "./types/QuanLyKhoaHocType";
 
-export const layDanhSachKhoaHocAction = () => {
-    return async (dispatch) => {
+export const layDanhSachKhoaHocAction = (tenKhoaHoc = '', navigate) => {
+    if(tenKhoaHoc !== ''){
+        return async (dispatch) => {
+            try {
+                const result = await quanLyKhoaHocSerVice.layDanhSachKhoaHoc(tenKhoaHoc);
+                console.log("resultAction: ", result);
+
+                if(result.status === 200){
+                    
+                    dispatch({
+                        type: SET_DANH_SACH_KHOA_HOC,
+                        danhSachKhoaHoc: result.data
+                    })
+                    navigate('/ketquatimkiem')
+                }
+                   
+    
+            } catch (error) {
+                console.log("error: ", error.response?.data);
+                navigate('/notfind')
+    
+            }
+        }
+    }else{
+        return async (dispatch) => {
         try {
-            const result = await quanLyKhoaHocSerVice.layDanhSachKhoaHoc();
+            const result = await quanLyKhoaHocSerVice.layDanhSachKhoaHoc(tenKhoaHoc);
             console.log("result: ", result.data);
             
                 dispatch({
@@ -17,6 +40,8 @@ export const layDanhSachKhoaHocAction = () => {
 
         }
     }
+    }
+    
 }
 export const layDanhMucKhoaHocAction = () => {
     return async (dispatch) => {
@@ -44,6 +69,23 @@ export const layKhoaHocTheoDanhMucAction = (madanhmuc) => {
                 dispatch({
                     type: SET_KHOAHOC_DANHMUC,
                     arrKhoaHocTheoDanhMuc: result.data
+                })
+
+        } catch (error) {
+            console.log("error: ", error.response?.data);
+
+        }
+    }
+}
+export const layThongTinKhoaHocAction = (makhoahoc) => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyKhoaHocSerVice.layThongTinKhoaHoc(makhoahoc);
+            console.log("result: ", result.data);
+            
+                dispatch({
+                    type: SET_THONGTIN_KHOAHOC,
+                    thongTinKhoaHoc: result.data
                 })
 
         } catch (error) {

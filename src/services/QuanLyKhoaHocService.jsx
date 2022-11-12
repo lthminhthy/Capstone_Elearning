@@ -6,14 +6,22 @@ export class QuanLyKhoaHocService extends baseService{
         super();
     }
 
-    layDanhSachKhoaHoc = () => {
-        return this.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${GROUPID}`)
+    layDanhSachKhoaHoc = (tenKhoaHoc= '') => {
+        if(tenKhoaHoc !== ''){
+             return this.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}&MaNhom=${GROUPID}`)
+        }else{
+            return this.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${GROUPID}`)
+        }
+        
     }
     layDanhMucKhoaHoc = () => {
         return this.get(`/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc`)
     }
     layKhoaHocTheoDanhMuc = (maDanhMuc) => {
         return this.get(`/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maDanhMuc}&MaNhom=${GROUPID}`)
+    }
+    layThongTinKhoaHoc = (makhoahoc) => {
+        return this.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${makhoahoc}`)
     }
 
 

@@ -1,28 +1,20 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
-import { NavLink } from 'react-router-dom'
-import { layKhoaHocTheoDanhMucAction } from '../../redux/actions/QuanLyKhoaHocAction'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 
-const KhoaHocTheoDanhMuc = () => {
-    const dispatch = useDispatch()
-    const { madanhmuc } = useParams()
-    const { arrKhoaHocTheoDanhMuc } = useSelector(state => state.QuanLyKhoaHocReducer)
-    console.log("arrKhoaHocTheoDanhMuc: ", arrKhoaHocTheoDanhMuc);
-    console.log("maDanhMuc: ", madanhmuc);
-    useEffect(() => {
-        dispatch(layKhoaHocTheoDanhMucAction(madanhmuc))
-    }, [madanhmuc])
-
+const KetQuaTimKiem = () => {
+    const { danhSachKhoaHoc } = useSelector(state => state.QuanLyKhoaHocReducer)
+    console.log("danhSachKhoaHoc: ", danhSachKhoaHoc);
     return (
         <section className="py-6 bg-retro-beige ">
             <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
                 <p className="p-2 text-sm font-medium tracking-wider text-center uppercase"></p>
-                <h1 className="text-3xl font-bold leading-none text-center sm:text-4xl text-retro-red">Các Khóa Học Phổ Biến</h1>
+                <h1 className="text-3xl font-bold leading-none text-center sm:text-4xl text-retro-red">Kết Quả Tìm Kiếm</h1>
+                <p className="text-xl font-semibold leading-none text-left sm:text-2xl text-retro-red">Tìm thấy {danhSachKhoaHoc.length} kết quả</p>
                 <div className="flex flex-row flex-wrap justify-center mt-8">
 
                     {
-                        arrKhoaHocTheoDanhMuc?.map((khoaHoc, index) => {
+                        danhSachKhoaHoc?.map((khoaHoc, index) => {
                             return <div key={index} className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-retro-primary">
                                 <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-retro-second" src={khoaHoc?.hinhAnh} />
                                 <div className="flex-1 my-4">
@@ -50,4 +42,4 @@ const KhoaHocTheoDanhMuc = () => {
     )
 }
 
-export default KhoaHocTheoDanhMuc
+export default KetQuaTimKiem

@@ -1,15 +1,20 @@
-import { SET_DANH_MUC_KHOA_HOC, SET_DANH_SACH_KHOA_HOC, SET_KHOAHOC_DANHMUC } from "../actions/types/QuanLyKhoaHocType"
+import { SET_DANH_MUC_KHOA_HOC, SET_DANH_SACH_KHOA_HOC, SET_KHOAHOC_DANHMUC, SET_THONGTIN_KHOAHOC } from "../actions/types/QuanLyKhoaHocType"
 
 const stateDefault = {
     danhSachKhoaHoc: [],
+    danhSachKhoaHocDefault: [],
+    danhSachKhoaHocAll: [],
     danhMucKhoaHoc:[],
-    arrKhoaHocTheoDanhMuc:[]
+    arrKhoaHocTheoDanhMuc:[],
+    thongTinKhoaHoc:{}
 }
 
 export const QuanLyKhoaHocReducer = (state = stateDefault, action) => {
     switch(action.type){
         case SET_DANH_SACH_KHOA_HOC: {
             state.danhSachKhoaHoc = action.danhSachKhoaHoc;
+            state.danhSachKhoaHocDefault = action.danhSachKhoaHoc;
+            state.danhSachKhoaHocAll = action.danhSachKhoaHoc;
             return {...state}
         }
         case SET_DANH_MUC_KHOA_HOC: {
@@ -18,6 +23,10 @@ export const QuanLyKhoaHocReducer = (state = stateDefault, action) => {
         }
         case SET_KHOAHOC_DANHMUC: {
             state.arrKhoaHocTheoDanhMuc = action.arrKhoaHocTheoDanhMuc;
+            return {...state}
+        }
+        case SET_THONGTIN_KHOAHOC: {
+            state.thongTinKhoaHoc = action.thongTinKhoaHoc;
             return {...state}
         }
 
