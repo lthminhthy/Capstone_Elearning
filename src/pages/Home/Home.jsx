@@ -30,7 +30,7 @@ const Home = () => {
               <NavLink to="/khoahoc" className="mb-5 block w-full rounded bg-retro-second px-12 py-3 text-sm font-medium text-retro-beige shadow hover:bg-retro-beige hover:text-retro-second focus:outline-none focus:ring active:bg-retro-second sm:w-auto xl:mr-5">
                 Xem Khóa Học
               </NavLink>
-              <a href="#" className="mb-5 block w-full rounded bg-retro-third px-12 py-3 text-sm font-medium text-retro-primary shadow hover:text-retro-beige hover:bg-retro-second focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
+              <a href="https://www.facebook.com/lophocviet/" className="mb-5 block w-full rounded bg-retro-third px-12 py-3 text-sm font-medium text-retro-primary shadow hover:text-retro-beige hover:bg-retro-second focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
                 Tư Vấn
               </a>
             </div>
