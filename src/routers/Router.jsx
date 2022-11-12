@@ -7,7 +7,10 @@ import KetQuaTimKiem from "../pages/KetQuaTimKiem/KetQuaTimKiem"
 import NotFind from "../pages/KetQuaTimKiem/NotFind"
 import KhoaHoc from "../pages/KhoaHoc/KhoaHoc"
 import KhoaHocTheoDanhMuc from "../pages/KhoaHocTheoDanhMuc/KhoaHocTheoDanhMuc"
+import Profile from "../pages/Profile/Profile"
+import TinTuc from "../pages//TinTuc/TinTuc"
 import MainTemplate from "../templates/MainTemplate/MainTemplate"
+import LienHe from "../pages/LienHe/LienHe"
 
 export const Router = () => {
     const routing = useRoutes([
@@ -42,6 +45,18 @@ export const Router = () => {
                 {
                     path:'chitiet/:makhoahoc',
                     element: <Detail></Detail>,
+                },
+                {
+                    path:'profile',
+                    element: <Profile></Profile>,
+                },
+                {
+                    path:'tintuc',
+                    element: <TinTuc></TinTuc>,
+                },
+                {
+                    path:'lienhe',
+                    element:<LienHe></LienHe>,
                 }
             ]
 

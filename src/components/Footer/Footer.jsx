@@ -15,16 +15,8 @@ const Footer = () => {
           Blog
         </a>
       </div>
-      <div className="px-5 py-2">
-        <a href="#" className="text-base leading-6 text-retro-beige hover:text-retro-red">
-          Team
-        </a>
-      </div>
-      <div className="px-5 py-2">
-        <a href="#" className="text-base leading-6 text-retro-beige hover:text-retro-red">
-          Pricing
-        </a>
-      </div>
+      
+      
       <div className="px-5 py-2">
         <a href="#" className="text-base leading-6 text-retro-beige hover:text-retro-red">
           Contact
@@ -32,7 +24,7 @@ const Footer = () => {
       </div>
       <div className="px-5 py-2">
         <a href="#" className="text-base leading-6 text-retro-beige hover:text-retro-red">
-          Terms
+          News
         </a>
       </div>
     </nav>
