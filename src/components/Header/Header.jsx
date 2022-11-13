@@ -129,13 +129,13 @@ const Header = () => {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <NavLink to='/tintuc' className='text-retro-beige hover:text-retro-second'>Tin Tức</NavLink>
+                  <NavLink to='/tintuc' className='text-retro-beige hover:text-retro-third'>Tin Tức</NavLink>
                 </div>
 
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <NavLink to='lienhe' className='text-retro-beige hover:text-retro-second'>Liên Hệ</NavLink>
+                  <NavLink to='lienhe' className='text-retro-beige hover:text-retro-third'>Liên Hệ</NavLink>
                 </div>
 
               </div>
@@ -224,13 +224,13 @@ const Header = () => {
 
                 <NavLink
                   to="/tintuc"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-3 rounded-md text-sm font-medium"
+                  className="text-retro-beige hover:text-retro-third hover:bg-gray-700  block px-3 py-3 rounded-md text-sm font-medium"
                 >
                   Tin Tức
                 </NavLink>
                 <NavLink
                   to="/lienhe"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-3 rounded-md text-sm font-medium"
+                  className="text-retro-beige hover:text-retro-third hover:bg-gray-700  block px-3 py-3 rounded-md text-sm font-medium"
                 >
                   Liên Hệ
                 </NavLink>

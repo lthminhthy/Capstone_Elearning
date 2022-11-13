@@ -7,16 +7,16 @@ module.exports = {
         roboto: ['Roboto']
       },
       colors: {
-        'retro-primary': '#343434',
-        'retro-second': '#E6B31E',
-        'retro-third':'#CACACA' ,
-        'retro-beige': '#FCFAF1',
+        // 'retro-primary': '#343434',
+        // 'retro-second': '#E6B31E',
+        // 'retro-third':'#CACACA' ,
+        // 'retro-beige': '#FCFAF1',
 
 
-        // 'retro-primary': '#EFEFEF',
-        // 'retro-second': '#FFDE00',
-        // 'retro-third':'#FFFAE7' ,
-        // 'retro-beige': '#D2001A' ,
+        'retro-primary': '#004445',
+        'retro-second': '#2C786C',
+        'retro-third':'#F8B400' ,
+        'retro-beige': '#FAF5E4' ,
 
 
 

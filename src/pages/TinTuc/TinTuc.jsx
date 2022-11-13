@@ -46,7 +46,7 @@ const TinTuc = () => {
                         <div className="lg:w-6/12 lg:p-0 p-7">
                             <h1 className="text-4xl font-bold leading-tight mb-5 capitalize"> ĐỘI NGŨ GIẢNG VIÊN </h1>
                             <p className="text-xl"> CyberSoft tuyển chọn các giảng viên đến từ các doanh nghiệp, có nhiều năm kinh nghiệm trong việc xây dựng các dự án lớn tại các tập đoàn trong và ngoài nước. Có kinh nghiệm trong việc chia sẻ kiến thức, phân tích dự án, tận tâm và hỗ trợ hết mình để học viên luôn học hỏi được các kinh nghiệm thực chiến, học tập kiến thức mới nhất từ thực tế, áp dụng ngay vào công việc ngay sau khóa học. Các giảng viên được tham gia khóa huấn luyện đào tạo tích hợp do đại học Arizona - ASU - Mỹ và tập đoàn Intel tài trợ để áp dụng các phương pháp giảng dạy hiện đại trong đào tạo nghề chất lượng cao. </p>
-                           
+
                         </div>
                         <div className="lg:w-5/12 order-2">
                             <img src="https://cybersoft.edu.vn/wp-content/uploads/2017/08/IMG_0920.jpg" style={{ transform: 'scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)' }} alt className="rounded" />
@@ -154,30 +154,16 @@ const TinTuc = () => {
                 </div>
                 <div className="mb-16 md:mb-0 md:max-w-xl sm:mx-auto md:text-center">
                     <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-                        The quick, brown fox jumps over a very sad and{' '}
+                        Sử dụng các phương pháp đào tạo hiện đại để tạo ra đội ngũ nhân sự lập trình chất lượng cao
+                        {' '}
                         <span className="inline-block text-deep-purple-accent-400">
-                            lazy dog
+                        đội ngũ nhân sự lập trình chất lượng cao
                         </span>
                     </h2>
                     <p className="mb-5 text-base text-gray-700 md:text-lg">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.
+                        CyberSoft sử dụng các phương pháp đào tạo tiên tiến và hiện đại trên nền tảng công nghệ giáo dục, kết hợp phương pháp truyền thống, phương pháp trực tuyến, lớp học đảo ngược và học tập dựa trên dự án thực tế, phối hợp giữa đội ngũ training nhiều kinh nghiệm và yêu cầu từ các công ty, doanh nghiệp. Qua đó, CyberSoft giúp người học phát triển cả tư duy, phân tích, chuyên sâu nghề nghiệp, học tập suốt đời, sẵn sàng đáp ứng mọi nhu cầu của doanh nghiệp.
                     </p>
-                    <div className="flex items-center md:justify-center">
-                        <a
-                            href="/"
-                            className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        >
-                            Get started
-                        </a>
-                        <a
-                            href="/"
-                            aria-label=""
-                            className="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
-                        >
-                            Learn more
-                        </a>
-                    </div>
+                   
                 </div>
             </div>
         </Fragment>
