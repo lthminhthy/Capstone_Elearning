@@ -23,6 +23,9 @@ export class QuanLyKhoaHocService extends baseService{
     layThongTinKhoaHoc = (makhoahoc) => {
         return this.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${makhoahoc}`)
     }
+    dangKyKhoaHoc = (thongTinDangKy) => {
+        return this.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`,thongTinDangKy)
+    }
 
 
 

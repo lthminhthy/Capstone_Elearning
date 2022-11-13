@@ -6,7 +6,8 @@ const stateDefault = {
     danhSachKhoaHocAll: [],
     danhMucKhoaHoc:[],
     arrKhoaHocTheoDanhMuc:[],
-    thongTinKhoaHoc:{}
+    
+    
 }
 
 export const QuanLyKhoaHocReducer = (state = stateDefault, action) => {

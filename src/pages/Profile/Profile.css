@@ -1,0 +1,24 @@
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #343434 !important;
+    font-size: 18px 
+    
+}
+.ant-tabs-tab:hover {
+    color: #e6b31e !important;
+}
+
+.ant-tabs-content-holder {
+background-color: #CACACA 
+}
+
+.ant-tabs-top > .ant-tabs-nav {
+    margin: 0 !important;
+}
+
+.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab {
+    margin: 0;
+    padding: 8px 16px;
+    background: #CACACA  !important;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}

@@ -1,5 +1,5 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { SET_DANG_NHAP } from "./types/QuanLyNguoiDungType";
+import { SET_DANG_NHAP, SET_THONGTIN_TAIKHOAN } from "./types/QuanLyNguoiDungType";
 
 export const dangNhapAction = (thongTinDangNhap, navigate) => {
     return async (dispatch) => {
@@ -21,6 +21,27 @@ export const dangNhapAction = (thongTinDangNhap, navigate) => {
             
 
         } catch (error) {
+            console.log("error: ", error.response?.data);
+            alert(`${error.response?.data}!`)
+
+        }
+    }
+}
+export const thongTinTaiKhoanAction = () => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyNguoiDungService.thongTinTaiKhoan();
+            console.log("resultTTTaiKhoan: ", result);
+            console.log("resultTTTaiKhoanData: ", result.data);
+
+            
+                dispatch({
+                    type: SET_THONGTIN_TAIKHOAN,
+                    thongTinTaiKhoan: result.data
+                    
+                })
+               
+            }catch (error) {
             console.log("error: ", error.response?.data);
             alert(`${error.response?.data}!`)
 

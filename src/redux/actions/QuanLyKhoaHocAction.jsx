@@ -1,5 +1,5 @@
 import { quanLyKhoaHocSerVice } from "../../services/QuanLyKhoaHocService";
-import { SET_DANH_MUC_KHOA_HOC, SET_DANH_SACH_KHOA_HOC, SET_KHOAHOC_DANHMUC, SET_THONGTIN_KHOAHOC } from "./types/QuanLyKhoaHocType";
+import { SET_DANGKY_KHOAHOC, SET_DANH_MUC_KHOA_HOC, SET_DANH_SACH_KHOA_HOC, SET_KHOAHOC_DANHMUC, SET_THONGTIN_KHOAHOC } from "./types/QuanLyKhoaHocType";
 
 export const layDanhSachKhoaHocAction = (tenKhoaHoc = '', navigate) => {
     if(tenKhoaHoc !== ''){
@@ -94,3 +94,16 @@ export const layThongTinKhoaHocAction = (makhoahoc) => {
         }
     }
 }
+// export const dangKyKhoaHocAction = (thongTinDangKy) => {
+//     return async (dispatch) => {
+//         try {
+//             const result = await quanLyKhoaHocSerVice.dangKyKhoaHoc(thongTinDangKy);
+//             console.log("resultDangKyKhoaHocThanhCong: ", result.data);
+            
+
+//         } catch (error) {
+//             console.log("errorDangKyKhoaHoc: ", error.response?.data);
+
+//         }
+//     }
+// }

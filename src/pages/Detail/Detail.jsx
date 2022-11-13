@@ -2,16 +2,22 @@ import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router'
 import { NavLink } from 'react-router-dom';
-import { layThongTinKhoaHocAction } from '../../redux/actions/QuanLyKhoaHocAction';
+import { dangKyKhoaHocAction, layThongTinKhoaHocAction } from '../../redux/actions/QuanLyKhoaHocAction';
+import { quanLyKhoaHocSerVice } from '../../services/QuanLyKhoaHocService';
 
 const Detail = () => {
 
     const { makhoahoc } = useParams()
     const dispatch = useDispatch()
-    console.log("makhoahoc: ", makhoahoc);
+    const {taiKhoan} = useSelector(state => state.QuanLyNguoiDungReducer.userLogin)
 
     const { thongTinKhoaHoc } = useSelector(state => state.QuanLyKhoaHocReducer)
     console.log("thongTinKhoaHoc: ", thongTinKhoaHoc);
+
+    const thongTinDangKy = {
+        makhoahoc,taiKhoan
+    }
+    console.log("thongTinDangKy: ", thongTinDangKy);
 
     useEffect(() => {
         dispatch(layThongTinKhoaHocAction(makhoahoc))
@@ -49,12 +55,18 @@ const Detail = () => {
                             <footer className="flex items-center mt-4">
 
                                 <div>
-                                    <NavLink className="group flex items-center justify-between rounded-lg border border-retro-primary hover:border-retro-beige px-5 py-3 text-retro-primary  transition-colors bg-retro-beige focus:outline-none focus:ring hover:bg-retro-second active:bg-retro-second" to=''>
-                                        <span className="font-medium transition-colors group-hover:text-retro-beige ">
-                                            Đăng ký
-                                        </span>
+                                    <button type='submit' onClick={() => {
+                                        quanLyKhoaHocSerVice.dangKyKhoaHoc(thongTinDangKy).then((result) => {
+                                            console.log("resultDangKy: ", result);
+                                            alert('Đăng ký khóa học thành công!')
 
-                                    </NavLink>
+                                        }).catch((error) => {
+                                            console.log("errorDangKy: ", error.s);
+                                            alert('Đăng ký thất bại!')
+                                        })
+                                    }} className="group flex items-center justify-between rounded-lg border border-retro-primary hover:border-retro-beige px-5 py-3 text-retro-primary  transition-colors bg-retro-beige focus:outline-none focus:ring hover:bg-retro-second active:bg-retro-secondfont-medium group-hover:text-retro-beige">Đăng ký
+            
+                                    </button>
                                 </div>
                             </footer>
                         </div>
