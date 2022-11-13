@@ -6,6 +6,7 @@ const stateDefault = {
     danhSachKhoaHocAll: [],
     danhMucKhoaHoc:[],
     arrKhoaHocTheoDanhMuc:[],
+    thongTinKhoaHoc:{}
     
     
 }

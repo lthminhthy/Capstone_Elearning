@@ -92,7 +92,7 @@ const DangKy = () => {
                 alert("Bạn đã đăng ký thành công")
                 navigate('/dangnhap')
             }).catch((error) => {
-                console.log("error: ", error);
+                console.log("error: ", error.response?.data);
                 alert("Đăng ký không thành công, hãy thử lại!")
             })
         }

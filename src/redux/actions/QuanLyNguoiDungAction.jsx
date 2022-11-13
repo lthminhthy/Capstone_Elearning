@@ -1,5 +1,5 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { SET_DANG_NHAP, SET_THONGTIN_TAIKHOAN } from "./types/QuanLyNguoiDungType";
+import { SET_DANG_NHAP, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "./types/QuanLyNguoiDungType";
 
 export const dangNhapAction = (thongTinDangNhap, navigate) => {
     return async (dispatch) => {
@@ -33,11 +33,16 @@ export const thongTinTaiKhoanAction = () => {
             const result = await quanLyNguoiDungService.thongTinTaiKhoan();
             console.log("resultTTTaiKhoan: ", result);
             console.log("resultTTTaiKhoanData: ", result.data);
+            // if(value != ''){
+            //     dispatch({
+            //         type: SET_THONGTIN_TAIKHOAN,
+            //         thongTinTaiKhoan:result.data
+            //     })
+            // }
 
-            
                 dispatch({
-                    type: SET_THONGTIN_TAIKHOAN,
-                    thongTinTaiKhoan: result.data
+                    type: SET_THONGTIN_TAIKHOAN_DEFAULT,
+                    thongTinTaiKhoanDefault: result.data
                     
                 })
                

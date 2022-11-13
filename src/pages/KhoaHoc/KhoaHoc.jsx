@@ -19,7 +19,7 @@ const KhoaHoc = () => {
                                 <p className='text-retro-beige'>{khoaHoc.moTa.length > 200 ? khoaHoc.moTa.substring(0, 200) + '...' : khoaHoc.moTa}</p>
                             </div>
                             <div className="flex items-center justify-center p-3 space-x-3 border-t-2 border-retro-primary">
-                                <NavLink className="group flex items-center justify-between rounded-lg border border-retro-second hover:border-retro-beige px-5 py-3 text-retro-second  transition-colors bg-retro-primary focus:outline-none focus:ring hover:bg-retro-beige active:bg-retro-second" to="/detail">
+                                <NavLink className="group flex items-center justify-between rounded-lg border border-retro-second hover:border-retro-beige px-5 py-3 text-retro-second  transition-colors bg-retro-primary focus:outline-none focus:ring hover:bg-retro-beige active:bg-retro-second"  to={`/chitiet/${khoaHoc.maKhoaHoc}`}>
                                     <span className="font-medium transition-colors group-hover:text-retro-primary ">
                                         Đăng ký
                                     </span>

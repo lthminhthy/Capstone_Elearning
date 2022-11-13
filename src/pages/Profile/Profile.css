@@ -22,3 +22,10 @@ background-color: #CACACA
     border: 1px solid #f0f0f0;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
+
+.ant-btn-primary {
+    color: #fff !important;
+    border-color: #e6b31e !important;
+    background: #e6b31d !important;
+
+    }

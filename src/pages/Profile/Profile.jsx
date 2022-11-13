@@ -1,23 +1,52 @@
 import { SmileOutlined } from '@ant-design/icons'
-import { Tabs } from 'antd'
+import { Input, Space, Tabs } from 'antd'
 import TabPane from 'antd/lib/tabs/TabPane'
-import React, { Fragment, useEffect } from 'react'
+import Search from 'antd/lib/transfer/search'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { thongTinTaiKhoanAction } from '../../redux/actions/QuanLyNguoiDungAction'
+import { quanLyKhoaHocSerVice } from '../../services/QuanLyKhoaHocService'
 import { ACCESS_TOKEN, USER_LOGIN } from '../../util/settings/config'
 import './Profile.css'
 
 const Profile = () => {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
-    const { thongTinTaiKhoan } = useSelector(state => state.QuanLyNguoiDungReducer)
-    console.log("thongTinTaiKhoan: ", thongTinTaiKhoan);
+    const { thongTinTaiKhoanDefault } = useSelector(state => state.QuanLyNguoiDungReducer)
+    const khoaHoc = thongTinTaiKhoanDefault.chiTietKhoaHocGhiDanh
+    const [list, setList] = useState()
+    useEffect(() => {
+        setList(khoaHoc)
+    }, [khoaHoc])
+    
+    console.log("list: ", list);
+    console.log("thongTinTaiKhoan: ", thongTinTaiKhoanDefault);
     // console.log("userLogin: ", userLogin);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const onChange = (key) => {
         console.log(key);
+    };
+    const { Search } = Input;
+    const onSearch = (value) => {
+        if (!value) {
+          setList(khoaHoc)  
+          return;
+        }
+        let listFound=[];
+        const found = list.find(element => element.tenKhoaHoc.toLowerCase() == value.toLowerCase())
+ 
+     
+        
+
+        if( found === undefined){
+            alert('Không tìm thấy khóa học')
+            setList(khoaHoc)
+        }else{
+            listFound.push(found);
+            setList(listFound)
+        }
     };
 
     useEffect(() => {
@@ -118,35 +147,62 @@ const Profile = () => {
                                                     {/* <h2 className="text-base font-bold text-indigo-600">
                                                         We have the best equipment in the market
                                                     </h2> */}
-                                                    <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-retro-primary">
+                                                    <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl font-heading text-retro-primary">
                                                         Các khóa học đã đăng ký
                                                     </h1>
                                                 </div>
-                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                                <div>
+                                                    <Search
+                                                        placeholder="Nhập khóa học cần tìm"
+                                                        allowClear
+                                                        enterButton="Search"
+                                                        size="large"
+                                                        onSearch={onSearch}
+                                                        className='mb-5'
+                                                    />
+
+                                                </div>
+                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                                     {
-                                                        thongTinTaiKhoan.chiTietKhoaHocGhiDanh?.map((thongTin, index) => {
-                                                            return <div key={index} className="w-full bg-gray-900 rounded-lg sahdow-lg overflow-hidden flex flex-col md:flex-row">
-                                                        <div className="w-full md:w-2/5 h-80">
-                                                            <img className="self-center flex-shrink-0 bg-center bg-cover object-center object-cover w-full h-full" src={thongTin.hinhAnh} alt="photo" />
-                                                        </div>
-                                                        <div className="w-full md:w-3/5 text-left p-6 md:p-4 space-y-4">
-                                                            <p className="text-xl text-white font-bold">{thongTin.tenKhoaHoc}</p>
-                                                            <p className="text-base text-gray-400 font-normal">Lượt xem: {thongTin.luotXem}</p>
-                                                            <p className="text-retro-beige leading-relaxed font-normal ">{thongTin.moTa.length > 200 ? thongTin.moTa.substring(0, 200) : thongTin.moTa}</p>
-                                                            <p className="text-base text-gray-400 font-normal">Đánh giá: {thongTin.danhGia}</p>
-                                                            <div className="flex justify-start space-x-2">
-                                                                <button href="#" className="font-bold hover:bg-retro-second bg-retro-beige text-gray-500 hover:text-gray-600 px-4 py-1 rounded-lg">
-                                                                   Hủy
-                                                                </button>
-                                                                
+                                                        list?.map((thongTin, index) => {
+                                                            console.log("thongTin: ", thongTin);
+                                                            return <div key={index} className="w-full bg-retro-second rounded-xl sahdow-lg overflow-hidden flex flex-col md:flex-row">
+                                                                <div className="w-full md:w-2/5 h-80">
+                                                                    <img className="bg-retro-second self-center flex-shrink-0 bg-center bg-cover object-center object-scale-down w-full h-full p-2" src={thongTin.hinhAnh} alt="photo" />
+                                                                </div>
+                                                                <div className="w-full md:w-3/5 text-left p-6 md:p-4 space-y-4">
+                                                                    <p className="text-2xl text-retro-primary font-bold">{thongTin.tenKhoaHoc}</p>
+                                                                    <p className="text-sm text-retro-beige font-normal">Lượt xem: {thongTin.luotXem}</p>
+                                                                    <p className="text-retro-primary leading-relaxed font-normal ">{thongTin.moTa.length > 200 ? thongTin.moTa.substring(0, 200) : thongTin.moTa}</p>
+                                                                    <p className="text-sm text-retro-beige font-normal">Đánh giá: {thongTin.danhGia}</p>
+                                                                    <div className="flex justify-start space-x-2">
+                                                                        <button onClick={() => {
+                                                                            quanLyKhoaHocSerVice.huyKhoaHoc({
+                                                                                "maKhoaHoc": thongTin.maKhoaHoc,
+                                                                                "taiKhoan": thongTinTaiKhoanDefault.taiKhoan
+                                                                            }).then((result) => {
+                                                                                console.log("result: ", result);
+                                                                                alert('Đã hủy ghi danh khóa học!')
+                                                                                dispatch(thongTinTaiKhoanAction())
+
+
+                                                                            }).catch((error) => {
+                                                                                console.log("error: ", error);
+                                                                                alert('Hủy ghi danh không thành công')
+
+                                                                            })
+                                                                        }} className="font-bold hover:bg-retro-primary bg-retro-beige text-gray-500 hover:text-retro-beige px-4 py-1 rounded-lg">
+                                                                            Hủy
+                                                                        </button>
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
                                                         })
                                                     }
 
-                                                   
-                                                    
+
+
                                                 </div>
                                             </section>
                                         </div>

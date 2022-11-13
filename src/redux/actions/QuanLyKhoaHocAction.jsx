@@ -94,16 +94,3 @@ export const layThongTinKhoaHocAction = (makhoahoc) => {
         }
     }
 }
-// export const dangKyKhoaHocAction = (thongTinDangKy) => {
-//     return async (dispatch) => {
-//         try {
-//             const result = await quanLyKhoaHocSerVice.dangKyKhoaHoc(thongTinDangKy);
-//             console.log("resultDangKyKhoaHocThanhCong: ", result.data);
-            
-
-//         } catch (error) {
-//             console.log("errorDangKyKhoaHoc: ", error.response?.data);
-
-//         }
-//     }
-// }

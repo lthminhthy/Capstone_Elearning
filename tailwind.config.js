@@ -11,6 +11,15 @@ module.exports = {
         'retro-second': '#E6B31E',
         'retro-third':'#CACACA' ,
         'retro-beige': '#FCFAF1',
+
+
+        // 'retro-primary': '#EFEFEF',
+        // 'retro-second': '#FFDE00',
+        // 'retro-third':'#FFFAE7' ,
+        // 'retro-beige': '#D2001A' ,
+
+
+
         // 'retro-primary': '#313552',
         // 'retro-red': '#B8405E',
         // 'retro-green': '#2EB086',
