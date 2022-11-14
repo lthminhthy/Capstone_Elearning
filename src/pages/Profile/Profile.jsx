@@ -2,20 +2,22 @@ import { SmileOutlined } from '@ant-design/icons'
 import { Input, Space, Tabs } from 'antd'
 import TabPane from 'antd/lib/tabs/TabPane'
 import Search from 'antd/lib/transfer/search'
+import { useFormik } from 'formik'
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { thongTinTaiKhoanAction } from '../../redux/actions/QuanLyNguoiDungAction'
 import { quanLyKhoaHocSerVice } from '../../services/QuanLyKhoaHocService'
-import { ACCESS_TOKEN, USER_LOGIN } from '../../util/settings/config'
+import { quanLyNguoiDungService } from '../../services/QuanLyNguoiDungService'
+import { ACCESS_TOKEN, GROUPID, USER_LOGIN } from '../../util/settings/config'
 import './Profile.css'
 
 const Profile = () => {
-    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     const { thongTinTaiKhoanDefault } = useSelector(state => state.QuanLyNguoiDungReducer)
     const khoaHoc = thongTinTaiKhoanDefault.chiTietKhoaHocGhiDanh
     const [list, setList] = useState()
+    const [form, setForm] = useState(false)
     useEffect(() => {
         setList(khoaHoc)
     }, [khoaHoc])
@@ -54,6 +56,113 @@ const Profile = () => {
         dispatch(thongTinTaiKhoanAction())
     }, [])
 
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+
+            taiKhoan: thongTinTaiKhoanDefault.taiKhoan,
+            matKhau: thongTinTaiKhoanDefault.matKhau,
+            hoTen: thongTinTaiKhoanDefault.hoTen,
+            soDT: thongTinTaiKhoanDefault.soDT,
+            maLoaiNguoiDung: thongTinTaiKhoanDefault.maLoaiNguoiDung,
+            maNhom: GROUPID,
+            email: thongTinTaiKhoanDefault.email
+
+        },
+
+        onSubmit: (values) => {
+            console.log("valuesProfile: ", values);
+            quanLyNguoiDungService.capNhatThongTinNguoiDung(values).then((result) => {
+                console.log("result: ", result);
+                alert('Cập nhật thông tin thành công!')
+                window.location.reload();
+
+            }).catch((error) => {
+                console.log("error: ", error);
+                alert('Cập nhật thông tin thất bại!')
+                
+
+            })
+
+
+        }
+    });
+
+
+    const renderProfile = () => {
+        return form === false ? 
+        <div className="text-center mt-12">
+            <h3 className="text-4xl font-semibold leading-normal mb-2 text-retro-primary ">
+                {thongTinTaiKhoanDefault.taiKhoan}
+            </h3>
+            <div className="text-sm leading-normal mt-0 mb-2 text-retro-primary font-bold uppercase">
+                <i className=" mr-2 text-lg text-blueGray-400" />
+                Họ tên: {thongTinTaiKhoanDefault.hoTen}
+            </div>
+            <div className="mb-2 text-blueGray-600 mt-10">
+                <i className="fas fa-briefcase mr-2 text-lg text-retro-primary" />
+                <span className='text-retro-primary'>
+                    Email: {thongTinTaiKhoanDefault.email}
+                </span>
+
+            </div>
+            <div className="mb-2 text-blueGray-600">
+                <i className="fas fa-university mr-2 text-lg text-retro-primary" />
+                <span className='text-retro-primary'>Số điện thoại: {thongTinTaiKhoanDefault.soDT}</span>
+
+            </div>
+            <div className="mb-2 text-blueGray-600">
+                <i className="fas fa-university mr-2 text-lg text-retro-primary" />
+                <span className='text-retro-primary'>Mật khẩu: {thongTinTaiKhoanDefault.matKhau}</span>
+
+            </div>
+            <div className='w-full lg:w-9/12 px-4 text-right'>
+                                            <button className='font-bold text-retro-second hover:text-retro-primary underline' onClick={() => {
+                                                setForm(true)
+                                            }}>Cập Nhật</button>
+                                        </div>
+        </div>
+        
+         :
+            <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
+                <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">Chỉnh sửa thông tin</h2>
+                <form onSubmit={formik.handleSubmit}
+                
+                >
+                    <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                        <div>
+                            <label className="text-retro-primary dark:text-gray-200" htmlFor="username">Tài khoản</label>
+                            <input  type="text" className="block w-full px-4 py-2 mt-2 text-retro-primary bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" name='taiKhoan' value={formik.values.taiKhoan} disabled  />
+                        
+                        </div>
+                        <div>
+                            <label className="text-retro-primary dark:text-gray-200" htmlFor="emailAddress">Mật khẩu</label>
+                            <input type="text" className="block w-full px-4 py-2 mt-2 text-retro-primary bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={formik.values.matKhau}  onChange={formik.handleChange} name='matKhau'/>
+                        </div>
+                        <div>
+                            <label className="text-retro-primary dark:text-gray-200" htmlFor="password">Họ tên</label>
+                            <input  type="text" className="block w-full px-4 py-2 mt-2 text-retro-primary bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={formik.values.hoTen} onChange={formik.handleChange} name='hoTen' />
+                        </div>
+                        <div>
+                            <label className="text-retro-primary dark:text-gray-200" htmlFor="passwordConfirmation">Số điện thoại</label>
+                            <input  type="text" className="block w-full px-4 py-2 mt-2 text-retro-primary bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={formik.values.soDT} onChange={formik.handleChange} name='soDT'/>
+                        </div>
+                        <div>
+                            <label className="text-retro-primary dark:text-gray-200" htmlFor="passwordConfirmation">Email</label>
+                            <input type="text" className="block w-full px-4 py-2 mt-2 text-retro-primary bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={formik.values.email} onChange={formik.handleChange} name='email'/>
+                        </div>
+                    </div>
+                    <div className="flex justify-end mt-6">
+                        <button  className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-retro-second rounded-md hover:bg-retro-third  focus:outline-none focus:bg-gray-600">Save</button>
+                    </div>
+                </form>
+            </section>
+
+
+
+
+    }
     return (
         <Fragment>
 
@@ -105,33 +214,15 @@ const Profile = () => {
 
                                 >
                                     <TabPane tabBarStyle tab='Thông tin cá nhân' key='1'>
-                                        <div className="text-center mt-12">
-                                            <h3 className="text-4xl font-semibold leading-normal mb-2 text-retro-primary ">
-                                                {userLogin.taiKhoan}
-                                            </h3>
-                                            <div className="text-sm leading-normal mt-0 mb-2 text-retro-primary font-bold uppercase">
-                                                <i className=" mr-2 text-lg text-blueGray-400" />
-                                                Họ tên: {userLogin.hoTen}
-                                            </div>
-                                            <div className="mb-2 text-blueGray-600 mt-10">
-                                                <i className="fas fa-briefcase mr-2 text-lg text-retro-primary" />
-                                                <span className='text-retro-primary'>
-                                                    Email: {userLogin.email}
-                                                </span>
 
-                                            </div>
-                                            <div className="mb-2 text-blueGray-600">
-                                                <i className="fas fa-university mr-2 text-lg text-retro-primary" />
-                                                <span className='text-retro-primary'>Số điện thoại: {userLogin.soDT}</span>
+                                        {renderProfile()}
 
-                                            </div>
-
-                                        </div>
+                                        
                                         <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                                             <div className="flex flex-wrap justify-center">
                                                 <div className="w-full lg:w-9/12 px-4">
-                                                    <div className="mb-2 text-blueGray-400">
-                                                        {userLogin.maLoaiNguoiDung === 'GV' ? <NavLink className='text-xs sm:text-sm hover:text-white text-retro-primary hover:bg-retro-primary bg-white border-black border p-2 rounded-lg' to='/admin/khoahoc'>Đến trang Admin</NavLink> : <SmileOutlined />}
+                                                    <div className="mb-2 ">
+                                                        {thongTinTaiKhoanDefault.maLoaiNguoiDung === 'GV' ? <NavLink className='text-xs sm:text-sm hover:text-white text-retro-primary hover:bg-retro-primary bg-white border-black border p-2 rounded-lg' to='/admin/quanlynguoidung'>Đến trang Admin</NavLink> : <SmileOutlined />}
 
                                                     </div>
 
@@ -164,28 +255,28 @@ const Profile = () => {
                                                 </div>
                                                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                                                     {
-                                                    list?.map((thongTin, index) => {
-                                                        return <div key={index} className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
-                                                                    <img className="rounded-t-lg p-8 h-56 w-full" src={thongTin.hinhAnh} alt="product image" />
-                                                            <div className="px-5 pb-5">
+                                                        list?.map((thongTin, index) => {
+                                                            return <div key={index} className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
+                                                                <img className="rounded-t-lg p-8 h-56 w-full bg-retro-beige" src={thongTin.hinhAnh} alt="product image" />
+                                                                <div className="px-5 pb-5 mt-3">
                                                                     <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">{thongTin.tenKhoaHoc}</h3>
-                                                                <div className="flex items-center mt-2.5 mb-5">
-                                                                    <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{thongTin.danhGia}</span>
+                                                                    <div className="flex items-center mt-2.5 mb-5">
+                                                                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{thongTin.danhGia}</span>
 
-                                                                    <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                                        </path>
-                                                                    </svg>
+                                                                        <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                                            </path>
+                                                                        </svg>
 
-                                                                </div>
-                                                                <div className='h-36'>
-                                                                    <p>
-                                                                    {thongTin.moTa.length > 200 ? thongTin.moTa.substring(0, 200) : thongTin.moTa}
-                                                                    </p>
-                                                                </div>
-                                                                <div className="flex items-center justify-between">
-                                                                    
-                                                                <button onClick={() => {
+                                                                    </div>
+                                                                    <div className='h-36'>
+                                                                        <p>
+                                                                            {thongTin.moTa.length > 200 ? thongTin.moTa.substring(0, 200) : thongTin.moTa}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="flex items-center justify-between">
+
+                                                                        <button onClick={() => {
                                                                             quanLyKhoaHocSerVice.huyKhoaHoc({
                                                                                 "maKhoaHoc": thongTin.maKhoaHoc,
                                                                                 "taiKhoan": thongTinTaiKhoanDefault.taiKhoan
@@ -203,11 +294,11 @@ const Profile = () => {
                                                                         }} className="font-bold hover:bg-retro-primary bg-retro-second text-retro-beige hover:text-retro-beige px-4 py-1 rounded-lg text-center">
                                                                             Hủy
                                                                         </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                    })
+                                                        })
                                                     }
 
 

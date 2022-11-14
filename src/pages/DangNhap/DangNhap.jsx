@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import ButtonBack from '../../components/ButtonBack/ButtonBack';
 import { dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
 
 const DangNhap = () => {
@@ -61,6 +62,7 @@ const DangNhap = () => {
                                             Bạn chưa có tài khoản? Đăng ký!
                                         </NavLink>
                                     </div>
+                                    <ButtonBack></ButtonBack>
 
                                 </div>
                             </div>

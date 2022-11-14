@@ -11,6 +11,9 @@ import Profile from "../pages/Profile/Profile"
 import TinTuc from "../pages//TinTuc/TinTuc"
 import MainTemplate from "../templates/MainTemplate/MainTemplate"
 import LienHe from "../pages/LienHe/LienHe"
+import AdminTemplate from "../templates/AdminTemplate/AdminTemplate"
+import AdminQuanLyNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminQuanLyNguoiDung"
+import AdminThemNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminThemNguoiDung"
 
 export const Router = () => {
     const routing = useRoutes([
@@ -68,6 +71,24 @@ export const Router = () => {
         {
             path:'/dangky',
             element:<DangKy></DangKy>
+        },
+        {
+            path: '/admin/',
+            element:<AdminTemplate></AdminTemplate>,
+            children: [
+                {
+                    path:'quanlynguoidung',
+                    element: <AdminQuanLyNguoiDung></AdminQuanLyNguoiDung>
+
+
+                },
+                {
+                    path:'quanlynguoidung/themnguoidung',
+                    element: <AdminThemNguoiDung></AdminThemNguoiDung>
+
+
+                }
+            ]
         }
         
 

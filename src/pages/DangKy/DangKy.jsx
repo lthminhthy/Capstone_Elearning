@@ -10,6 +10,7 @@ import { quanLyNguoiDungService } from '../../services/QuanLyNguoiDungService';
 import * as Yup from "yup";
 import isEmailValidator from 'validator/lib/isEmail';
 import './DangKy.css'
+import ButtonBack from '../../components/ButtonBack/ButtonBack';
 
 
 const formItemLayout = {
@@ -103,14 +104,14 @@ const DangKy = () => {
 
 
     return (
-        <div className="bg-retro-third h-screen w-screen text-center">
-            <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
+        <div className="bg-retro-third  min-w-screen w-screen h-full md:h-screen  min-h-screen text-center ">
+            <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0 mb-0 ">
                 {/* Row */}
                 <div className="w-full xl:w-3/4 lg:w-11/12 flex">
                     {/* Col */}
                     <div className="w-full h-auto bg-retro-third hidden lg:block lg:w-5/12 bg-cover rounded-l-lg" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1515965885361-f1e0095517ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80")' }} />
                     {/* Col */}
-                    <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
+                    <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none   lg:mt-0">
                         <h1 className="text-4xl text-center font-thin mb-10">Đăng ký tài khoản</h1>
 
 
@@ -214,7 +215,7 @@ const DangKy = () => {
 
 
                         </Form>
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-4 sm:mb-0 mb-16">
 
                             <div>
                                 <NavLink className="no-underline hover:underline text-blue-dark text-xs" to="/dangnhap">
@@ -229,6 +230,8 @@ const DangKy = () => {
 
                 </div>
             </div>
+            <ButtonBack></ButtonBack>
+            
         </div>
 
 

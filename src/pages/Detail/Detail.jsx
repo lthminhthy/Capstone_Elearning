@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router'
 import { NavLink } from 'react-router-dom';
+import ButtonBack from '../../components/ButtonBack/ButtonBack';
 import { dangKyKhoaHocAction, layThongTinKhoaHocAction } from '../../redux/actions/QuanLyKhoaHocAction';
 import { quanLyKhoaHocSerVice } from '../../services/QuanLyKhoaHocService';
 
@@ -74,14 +75,16 @@ const Detail = () => {
                 </div>
             </section>
 
-            <div x-show="open" class="fixed bottom-0 right-0 w-full md:bottom-8 md:right-12 md:w-auto z-60" x-data="{ open: true }">
+            {/* <div x-show="open" class="fixed bottom-0 right-0 w-full md:bottom-8 md:right-12 md:w-auto z-60" x-data="{ open: true }">
                 <div className="bg-retro-primary text-sm p-3 md:rounded shadow-lg flex justify-between">
 
                     <NavLink className="text-retro-beige hover:text-retro-second " to='/' >
-                        Home
+                        Trang chủ
                     </NavLink>
                 </div>
-            </div>
+            </div> */}
+            <ButtonBack></ButtonBack>
+
 
 
 

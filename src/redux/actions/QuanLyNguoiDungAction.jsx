@@ -1,5 +1,5 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { SET_DANG_NHAP, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "./types/QuanLyNguoiDungType";
+import { SET_DANG_NHAP, SET_NGUOIDUNG, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "./types/QuanLyNguoiDungType";
 
 export const dangNhapAction = (thongTinDangNhap, navigate) => {
     return async (dispatch) => {
@@ -33,16 +33,31 @@ export const thongTinTaiKhoanAction = () => {
             const result = await quanLyNguoiDungService.thongTinTaiKhoan();
             console.log("resultTTTaiKhoan: ", result);
             console.log("resultTTTaiKhoanData: ", result.data);
-            // if(value != ''){
-            //     dispatch({
-            //         type: SET_THONGTIN_TAIKHOAN,
-            //         thongTinTaiKhoan:result.data
-            //     })
-            // }
+          
 
                 dispatch({
                     type: SET_THONGTIN_TAIKHOAN_DEFAULT,
                     thongTinTaiKhoanDefault: result.data
+                    
+                })
+               
+            }catch (error) {
+            console.log("error: ", error.response?.data);
+            alert(`${error.response?.data}!`)
+
+        }
+    }
+}
+export const timKiemNguoiDungTheoTenAction = (thongTin='') => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyNguoiDungService.timKiemNguoiDungTheoTen(thongTin);
+            console.log("result: ", result);
+          
+
+                dispatch({
+                    type: SET_NGUOIDUNG,
+                    danhSachNguoiDung: result.data
                     
                 })
                
