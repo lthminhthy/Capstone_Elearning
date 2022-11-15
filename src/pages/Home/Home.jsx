@@ -45,7 +45,6 @@ const Home = () => {
 
       <section className="py-6 bg-retro-beige z-10">
         <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
-          <p className="p-2 text-sm font-medium tracking-wider text-center uppercase"></p>
           <h1 className="text-3xl font-bold leading-none text-center sm:text-4xl text-retro-primary">Các Khóa Học Mới</h1>
           <div className="flex flex-row flex-wrap justify-center mt-8 gap-5">
 

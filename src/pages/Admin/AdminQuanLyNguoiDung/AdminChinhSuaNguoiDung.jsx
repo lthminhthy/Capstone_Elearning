@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import {
     Button,
@@ -11,34 +10,41 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
 import { GROUPID } from '../../../util/settings/config';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { quanLyNguoiDungService } from '../../../services/QuanLyNguoiDungService';
 import { SET_MALOAI_USER } from '../../../redux/actions/types/QuanLyNguoiDungType';
-import { layDanhSachLoaiNguoiDungAction } from '../../../redux/actions/QuanLyNguoiDungAction';
+import { layDanhSachLoaiNguoiDungAction, thongTinTaiKhoanAction, timKiemNguoiDungTheoTenAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 
 
-const AdminThemNguoiDung = () => {
+const AdminChinhSuaNguoiDung = () => {
+    const { danhSachNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer)
+    console.log("danhSachNguoiDung: ", danhSachNguoiDung);
     const [componentSize, setComponentSize] = useState('default');
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {id} = useParams() 
+    const user = danhSachNguoiDung[id]
+    console.log("user: ", user);
+  
 
     const { loaiND } = useSelector(state => state.QuanLyNguoiDungReducer)
 
 
     useEffect(() => {
         dispatch(layDanhSachLoaiNguoiDungAction())
+       
     }, [])
 
 
     const formik = useFormik({
         initialValues: {
-            taiKhoan: '',
-            matKhau: '',
-            email: '',
-            soDT: '',
+            taiKhoan: user.taiKhoan,
+            matKhau: user.matKhau,
+            email: user.email,
+            soDT: user.soDt,
             maNhom: GROUPID,
-            maLoaiNguoiDung: '',
-            hoTen: '',
+            maLoaiNguoiDung: user.maLoaiNguoiDung,
+            hoTen: user.hoTen,
 
         },
         validationSchema: Yup.object({
@@ -59,15 +65,16 @@ const AdminThemNguoiDung = () => {
         }),
 
         onSubmit: (values) => {
-            console.log("valuesubmit: ", values);
-            quanLyNguoiDungService.themNguoiDung(values).then((result) => {
+            console.log("valueedit: ", values);
+            quanLyNguoiDungService.capNhatThongTinNguoiDung(values).then((result) => {
                 console.log("result: ", result);
-                alert('Thêm người dùng thành công')
+                alert('Cập nhật thông tin thành công!')
                 navigate('/admin/quanlynguoidung')
 
             }).catch((error) => {
                 console.log("error: ", error);
-                alert('Thêm người dùng thất bại!')
+                alert('Cập nhật thông tin thất bại!')
+                navigate('/admin/quanlynguoidung')
             })
 
         }
@@ -110,7 +117,7 @@ const AdminThemNguoiDung = () => {
                 size={componentSize}
 
             >
-                <h2 className='text-xl mb-5'>Thêm Người Dùng</h2>
+                <h2 className='text-xl mb-5'>Cập nhật thông tin người dùng</h2>
                 <Form.Item label="Form Size" name="size">
                     <Radio.Group>
                         <Radio.Button value="small">Small</Radio.Button>
@@ -119,31 +126,31 @@ const AdminThemNguoiDung = () => {
                     </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Họ Tên">
-                    <Input name='hoTen' onChange={formik.handleChange} />
+                    <Input name='hoTen' onChange={formik.handleChange} value={formik.values.hoTen} />
                     {formik.errors.hoTen && formik.touched.hoTen && (
                         <p className='text-red-500 mb-0 text-sm'>{formik.errors.hoTen}</p>
                     )}
                 </Form.Item>
                 <Form.Item label="Tài Khoản">
-                    <Input name='taiKhoan' onChange={formik.handleChange} />
+                    <Input name='taiKhoan' disabled value={formik.values.taiKhoan} />
                     {formik.errors.taiKhoan && formik.touched.taiKhoan && (
                         <p className='text-red-500 mb-0 text-sm'>{formik.errors.taiKhoan}</p>
                     )}
                 </Form.Item>
                 <Form.Item label="Mật Khẩu">
-                    <Input name='matKhau' onChange={formik.handleChange} />
+                    <Input name='matKhau' onChange={formik.handleChange} value={formik.values.matKhau}/>
                     {formik.errors.matKhau && formik.touched.matKhau && (
                         <p className='text-red-500 mb-0 text-sm'>{formik.errors.trailer}</p>
                     )}
                 </Form.Item>
                 <Form.Item label="Email">
-                    <Input name='email' onChange={formik.handleChange} />
+                    <Input name='email' onChange={formik.handleChange} value={formik.values.email} />
                     {formik.errors.email && formik.touched.email && (
                         <p className='text-red-500 mb-0 text-sm'>{formik.errors.email}</p>
                     )}
                 </Form.Item>
                 <Form.Item label="Số điện thoại">
-                    <Input name='soDT' onChange={formik.handleChange} />
+                    <Input name='soDT' onChange={formik.handleChange} value={formik.values.soDT}/>
                     {formik.errors.soDT && formik.touched.soDT && (
                         <p className='text-red-500 mb-0 text-sm'>{formik.errors.soDT}</p>
                     )}
@@ -153,6 +160,7 @@ const AdminThemNguoiDung = () => {
                         options={convertSelectLND()}
                         placeholder="Chọn loại người dùng"
                         onChange={handleChangeLoaiND}
+                        value={formik.values.maLoaiNguoiDung}
                         
                     />
                     {formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung && (
@@ -163,7 +171,7 @@ const AdminThemNguoiDung = () => {
 
                 <div className='text-center'>
                     <Form.Item label='' >
-                        <Button htmlType="submit" className='bg-blue-600 p-2 text-white rounded-lg hover:bg-blue-900 hover:text-white border hover:border-blue-600'>Thêm Người Dùng</Button>
+                        <Button htmlType="submit" className='bg-blue-600 p-2 text-white rounded-lg hover:bg-blue-900 hover:text-white border hover:border-blue-600'>Cập nhật</Button>
                     </Form.Item>
                 </div>
 
@@ -172,4 +180,4 @@ const AdminThemNguoiDung = () => {
     )
 }
 
-export default AdminThemNguoiDung
+export default AdminChinhSuaNguoiDung

@@ -14,6 +14,7 @@ import LienHe from "../pages/LienHe/LienHe"
 import AdminTemplate from "../templates/AdminTemplate/AdminTemplate"
 import AdminQuanLyNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminQuanLyNguoiDung"
 import AdminThemNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminThemNguoiDung"
+import AdminChinhSuaNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminChinhSuaNguoiDung"
 
 export const Router = () => {
     const routing = useRoutes([
@@ -85,6 +86,12 @@ export const Router = () => {
                 {
                     path:'quanlynguoidung/themnguoidung',
                     element: <AdminThemNguoiDung></AdminThemNguoiDung>
+
+
+                },
+                {
+                    path:'quanlynguoidung/capnhat/:id',
+                    element: <AdminChinhSuaNguoiDung></AdminChinhSuaNguoiDung>
 
 
                 }

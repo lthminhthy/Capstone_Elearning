@@ -128,7 +128,7 @@ const AdminQuanLyNguoiDung = () => {
           return <Fragment >
             <div className='text-center'>
             <button className='hover:bg-retro-primary bg-white border border-retro-primary text-retro-second hover:text-white px-1 py-1.5  rounded-md mr-3 font-semibold text-base'>Ghi danh</button>
-              <NavLink to={`/admin/user/edituser/taiKhoan=${user.taiKhoan}`} className='hover:bg-yellow-500 bg-white border border-yellow-500 text-yellow-500 hover:text-white px-3 py-1.5  rounded-md mr-3 font-bold text-lg'><EditOutlined></EditOutlined></NavLink>
+              <NavLink to={`/admin/quanlynguoidung/capnhat/${danhSachNguoiDung.indexOf(user)}`} className='hover:bg-yellow-500 bg-white border border-yellow-500 text-yellow-500 hover:text-white px-3 py-1.5  rounded-md mr-3 font-bold text-lg'><EditOutlined></EditOutlined></NavLink>
 
               <span style={{ cursor: 'pointer' }} className='hover:bg-red-500  border border-red-500 text-red-500 hover:text-white px-3 py-1.5 rounded-md mr-3 font-bold text-lg' onClick={() => {
                 if (window.confirm('Bạn có chắc muốn xóa người dùng ' + user.taiKhoan + ' không?')) {
@@ -140,6 +140,7 @@ const AdminQuanLyNguoiDung = () => {
 
                     }).catch((error) => {
                         console.log("error: ", error);
+                        alert('Thất bại! ' + '' +  error.response?.data)
 
                     })
                 
@@ -174,10 +175,10 @@ const AdminQuanLyNguoiDung = () => {
                     <Search placeholder="Nhập họ tên hoặc tài khoản người dùng cần tìm" enterButton allowClear size="large" onSearch={onSearch} />
 
                 </Space>
-                <Button type="primary" shape="circle" size="large" onClick={() => {
+                <Button className='w-48' type="primary" shape="round" size="large" onClick={() => {
                     navigate('/admin/quanlynguoidung/themnguoidung')
                 }} >
-                    +
+                    Thêm người dùng
                 </Button>
             </div>
 

@@ -24,6 +24,12 @@ export class QuanLyNguoiDungService extends baseService {
     xoaNguoiDung = (taiKhoan) => {
         return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
     }
+    themNguoiDung = (thongTinNguoiDung) => {
+        return this.post(`/api/QuanLyNguoiDung/ThemNguoiDung`,thongTinNguoiDung)
+    }
+    layDanhSachLoaiNguoiDung = () => {
+        return this.get(`/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung`)
+    }
     timKiemNguoiDungTheoTen = (thongTin = '') => {
         if (thongTin.trim() != '') {
             return this.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUPID}&tuKhoa=${thongTin}`)
@@ -32,10 +38,6 @@ export class QuanLyNguoiDungService extends baseService {
 
     }
    
-
-
-
-
 }
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService

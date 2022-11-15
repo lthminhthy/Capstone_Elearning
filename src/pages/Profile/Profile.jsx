@@ -122,10 +122,7 @@ const Profile = () => {
                                                 setForm(true)
                                             }}>Cập Nhật</button>
                                         </div>
-        </div>
-        
-         :
-            <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
+        </div>: <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
                 <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">Chỉnh sửa thông tin</h2>
                 <form onSubmit={formik.handleSubmit}
                 
@@ -306,91 +303,7 @@ const Profile = () => {
 
 
                                                 </div>
-                                                {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                                    {
-                                                        list?.map((thongTin, index) => {
-                                                            console.log("thongTin: ", thongTin);
-                                                            return <div key={index} className="w-full bg-retro-beige rounded-xl sahdow-lg overflow-hidden flex flex-col md:flex-row">
-                                                                <div className="w-full md:w-2/5 h-80">
-                                                                    <img className="bg-retro-beige self-center flex-shrink-0 bg-center bg-cover object-center object-scale-down w-full h-full p-2" src={thongTin.hinhAnh} alt="photo" />
-                                                                </div>
-                                                                <div className="w-full md:w-3/5 text-left p-6 md:p-4 space-y-4">
-                                                                    <p className="text-2xl text-retro-primary font-bold">{thongTin.tenKhoaHoc}</p>
-                                                                    <p className="text-sm text-retro-primary font-normal">Lượt xem: {thongTin.luotXem}</p>
-                                                                    <p className="text-retro-primary leading-relaxed font-normal ">{thongTin.moTa.length > 200 ? thongTin.moTa.substring(0, 200) : thongTin.moTa}</p>
-                                                                    <p className="text-sm text-retro-primary font-normal">Đánh giá: {thongTin.danhGia}</p>
-                                                                    <div className="flex justify-start space-x-2">
-                                                                        <button onClick={() => {
-                                                                            quanLyKhoaHocSerVice.huyKhoaHoc({
-                                                                                "maKhoaHoc": thongTin.maKhoaHoc,
-                                                                                "taiKhoan": thongTinTaiKhoanDefault.taiKhoan
-                                                                            }).then((result) => {
-                                                                                console.log("result: ", result);
-                                                                                alert('Đã hủy ghi danh khóa học!')
-                                                                                dispatch(thongTinTaiKhoanAction())
-
-
-                                                                            }).catch((error) => {
-                                                                                console.log("error: ", error);
-                                                                                alert('Hủy ghi danh không thành công')
-
-                                                                            })
-                                                                        }} className="font-bold hover:bg-retro-primary bg-retro-second text-retro-beige hover:text-retro-beige px-4 py-1 rounded-lg text-center">
-                                                                            Hủy
-                                                                        </button>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        })
-                                                    }
-
-
-
-                                                </div> */}
-
-                                                {/* <div className="max-w-2xl mx-auto">
-                                                    <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
-                                                        <a href="#">
-                                                            <img className="rounded-t-lg p-8" src="https://flowbite.com/docs/images/products/product-1.png" alt="product image" />
-                                                        </a>
-                                                        <div className="px-5 pb-5">
-                                                            <a href="#">
-                                                                <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">Apple Watch Series 7
-                                                                    GPS, Aluminium Case, Starlight Sport</h3>
-                                                            </a>
-                                                            <div className="flex items-center mt-2.5 mb-5">
-                                                                <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                                    </path>
-                                                                </svg>
-                                                                <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                                    </path>
-                                                                </svg>
-                                                                <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                                    </path>
-                                                                </svg>
-                                                                <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                                    </path>
-                                                                </svg>
-                                                                <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                                    </path>
-                                                                </svg>
-                                                                <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
-                                                            </div>
-                                                            <div className="flex items-center justify-between">
-                                                                <span className="text-3xl font-bold text-gray-900 dark:text-white">$599</span>
-                                                                <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                                                                    to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div> */}
+                                                
 
                                             </section>
                                         </div>

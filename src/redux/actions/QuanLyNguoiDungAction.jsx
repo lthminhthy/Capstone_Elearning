@@ -1,5 +1,5 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { SET_DANG_NHAP, SET_NGUOIDUNG, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "./types/QuanLyNguoiDungType";
+import { SET_DANG_NHAP, SET_MALOAI_USER, SET_NGUOIDUNG, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "./types/QuanLyNguoiDungType";
 
 export const dangNhapAction = (thongTinDangNhap, navigate) => {
     return async (dispatch) => {
@@ -58,6 +58,24 @@ export const timKiemNguoiDungTheoTenAction = (thongTin='') => {
                 dispatch({
                     type: SET_NGUOIDUNG,
                     danhSachNguoiDung: result.data
+                    
+                })
+               
+            }catch (error) {
+            console.log("error: ", error.response?.data);
+            alert(`${error.response?.data}!`)
+
+        }
+    }
+}
+export const layDanhSachLoaiNguoiDungAction = () => {
+    return async (dispatch) => {
+        try {
+            const result = await quanLyNguoiDungService.layDanhSachLoaiNguoiDung();
+            console.log("result: ", result);
+                dispatch({
+                    type: SET_MALOAI_USER,
+                    loaiND: result.data
                     
                 })
                
