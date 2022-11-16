@@ -1,3 +1,4 @@
+
 import { Modal, Select, Table } from 'antd';
 import React, { Fragment, useState } from 'react';
 
@@ -10,41 +11,43 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { EditOutlined, DeleteOutlined, CalendarOutlined } from '@ant-design/icons';
 import { timKiemNguoiDungTheoTenAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 import { quanLyNguoiDungService } from '../../../services/QuanLyNguoiDungService';
+import { layDanhSachKhoaHocAction } from '../../../redux/actions/QuanLyKhoaHocAction';
+import { quanLyKhoaHocSerVice } from '../../../services/QuanLyKhoaHocService';
 
 
 const { Search } = Input;
 
-const AdminQuanLyNguoiDung = () => {
+const AdminQuanLyKhoaHoc = () => {
 
-    const { danhSachNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
-    console.log("danhSachNguoiDung: ", danhSachNguoiDung);
+
+    const { danhSachKhoaHocDefault } = useSelector(state => state.QuanLyKhoaHocReducer);
+    console.log("danhSachKhoaHocDefault: ", danhSachKhoaHocDefault);
     const [open, setOpen] = useState(false);
-
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(timKiemNguoiDungTheoTenAction())
+        dispatch(layDanhSachKhoaHocAction())
 
     }, [])
 
     const onSearch = (value) => {
         console.log("valueS: ", value);
-        dispatch(timKiemNguoiDungTheoTenAction(value))
+        dispatch(layDanhSachKhoaHocAction(value))
     };
 
 
     const columns = [
 
         {
-            title: 'Tài khoản',
-            dataIndex: 'taiKhoan',
+            title: 'Mã khóa học',
+            dataIndex: 'maKhoaHoc',
             value: (text, object) => { return <span>{text}</span> },
 
 
             sorter: (a, b) => {
-                let taiKhoanA = a.taiKhoan.toLowerCase().trim();
-                let taiKhoanB = b.taiKhoan.toLowerCase().trim();
-                if (taiKhoanA < taiKhoanB) {
+                let maKhoaHocA = a.maKhoaHoc.toLowerCase().trim();
+                let maKhoaHocB = b.maKhoaHoc.toLowerCase().trim();
+                if (maKhoaHocA < maKhoaHocB) {
                     return 1
                 }
                 return -1
@@ -54,12 +57,12 @@ const AdminQuanLyNguoiDung = () => {
         },
 
         {
-            title: 'Mật khẩu',
-            dataIndex: 'matKhau',
+            title: 'Tên khóa học',
+            dataIndex: 'tenKhoaHoc',
             sorter: (a, b) => {
-                let matKhauA = a.matKhau.toLowerCase().trim();
-                let matKhauB = b.matKhau.toLowerCase().trim();
-                if (matKhauA < matKhauB) {
+                let tenKhoaHocA = a.tenKhoaHoc.toLowerCase().trim();
+                let tenKhoaHocB = b.tenKhoaHoc.toLowerCase().trim();
+                if (tenKhoaHocA < tenKhoaHocB) {
                     return 1
                 }
                 return -1
@@ -70,63 +73,52 @@ const AdminQuanLyNguoiDung = () => {
             onFilter: (value, record) => record.address.indexOf(value) === 0,
         },
         {
-            title: 'Họ tên',
-            dataIndex: 'hoTen',
+            title: 'Hình ảnh',
+            dataIndex: 'hinhAnh',
             onFilter: (value, record) => record.name.indexOf(value) === 0,
+            render: (text, kh) => {
+                return <Fragment>
+                    <img width={100} src={kh.hinhAnh} alt="" />
+                </Fragment>
+
+            },
+            width: '15%',
+        },
+        {
+            title: 'Lượt xem',
+            dataIndex: 'luotXem',
             sorter: (a, b) => {
-                let hoTenA = a.hoTen.toLowerCase().trim();
-                let hoTenB = b.hoTen.toLowerCase().trim();
-                if (hoTenA < hoTenB) {
+                let luotXemA = a.luotXem;
+                let luotXemB = b.luotXem;
+                if (luotXemA < luotXemB) {
                     return 1
                 }
                 return -1
             },
-            sortDirections: ['descend'],
-            render: (text, user) => {
-                return <Fragment>
-                    {user.hoTen?.length > 50 ? user.hoTen?.substring(0, 50) + '...' : user.hoTen}
-                </Fragment>
-
-            },
-            width: '15%',
-        },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            render: (text, user) => {
-                return <Fragment>
-                    {user.email?.length > 50 ? user.email?.substring(0, 50) + '...' : user.email}
-                </Fragment>
-
-            },
-            width: '10%',
-        },
-        {
-            title: 'Số điện thoại',
-            dataIndex: 'soDt',
-            sorter: (soDTA, soDTB) => soDTA.soDt - soDTB.soDt,
-            render: (text, user) => {
-                return <Fragment>
-                    {user.soDt?.length > 50 ? user.soDt?.substring(0, 50) + '...' : user.soDt}
-                </Fragment>
-
-            },
-            width: '15%',
+            width: "10%",
             sortDirections: ['descend', 'ascend'],
 
             onFilter: (value, record) => record.address.indexOf(value) === 0,
         },
         {
-            title: 'Loại Người Dùng',
-            dataIndex: 'maLoaiNguoiDung',
-            width: '10%',
-            sortDirections: ['descend', 'ascend'],
 
+            title: 'Người tạo',
+            dataIndex: 'nguoiTao',
+            render: (nguoiTao) => {
+                return <Fragment>
+                    {nguoiTao.taiKhoan}
+                </Fragment>
+
+            },
+            width: "15%",
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
         },
+
         {
-            title: 'Hành Động',
+            title: 'Thao tác',
             dataIndex: '',
-            render: (text, user) => {
+            render: (text, KH) => {
                 return <Fragment >
                     <div className='text-center'>
                         <button className='hover:bg-retro-primary bg-white border border-retro-primary text-retro-second hover:text-white px-1 py-1.5  rounded-md mr-3 font-semibold text-base' onClick={() => setOpen(true)}>Ghi danh</button>
@@ -152,15 +144,14 @@ const AdminQuanLyNguoiDung = () => {
 
 
 
-                        <NavLink to={`/admin/quanlynguoidung/capnhat/${danhSachNguoiDung.indexOf(user)}`} className='hover:bg-yellow-500 bg-white border border-yellow-500 text-yellow-500 hover:text-white px-3 py-1.5  rounded-md mr-3 font-bold text-lg'><EditOutlined></EditOutlined></NavLink>
+                        <NavLink to={`/admin/quanlynguoidung/capnhat/${danhSachKhoaHocDefault.indexOf(KH)}`} className='hover:bg-yellow-500 bg-white border border-yellow-500 text-yellow-500 hover:text-white px-3 py-1.5  rounded-md mr-3 font-bold text-lg'><EditOutlined></EditOutlined></NavLink>
 
                         <span style={{ cursor: 'pointer' }} className='hover:bg-red-500  border border-red-500 text-red-500 hover:text-white px-3 py-1.5 rounded-md mr-3 font-bold text-lg' onClick={() => {
-                            if (window.confirm('Bạn có chắc muốn xóa người dùng ' + user.taiKhoan + ' không?')) {
-                                quanLyNguoiDungService.xoaNguoiDung(user.taiKhoan).then((result) => {
+                            if (window.confirm('Bạn có chắc muốn xóa khóa học ' + KH.taiKhoan + ' không?')) {
+                                quanLyKhoaHocSerVice.xoaKhoaHoc(KH.maKhoaHoc).then((result) => {
                                     console.log("result: ", result);
-                                    alert('Đã xóa người dùng thành công!')
-                                    dispatch(timKiemNguoiDungTheoTenAction())
-
+                                    alert('Đã xóa khoá học thành công!')
+                                    dispatch(layDanhSachKhoaHocAction())
 
                                 }).catch((error) => {
                                     console.log("error: ", error);
@@ -183,7 +174,8 @@ const AdminQuanLyNguoiDung = () => {
             onFilter: (value, record) => record.address.indexOf(value) === 0,
         },
     ];
-    const data = danhSachNguoiDung;
+    const data = danhSachKhoaHocDefault
+    ;
     const onChange = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
     };
@@ -192,17 +184,17 @@ const AdminQuanLyNguoiDung = () => {
 
     return (
         <div className='container'>
-            <h2 className='lg:text-lg text-base mb-5'>Quản Lý Người Dùng</h2>
+            <h2 className='lg:text-lg text-base mb-5'>Quản Lý Khóa Học</h2>
             <div className='flex justify-between items-center'>
                 <Space direction="vertical" className='w-screen'>
 
-                    <Search placeholder="Nhập họ tên hoặc tài khoản người dùng cần tìm" enterButton allowClear size="large" onSearch={onSearch} />
+                    <Search placeholder="Nhập tên khóa học cần tìm" enterButton allowClear size="large" onSearch={onSearch} />
 
                 </Space>
                 <Button className='w-48' type="primary" shape="round" size="large" onClick={() => {
-                    navigate('/admin/quanlynguoidung/themnguoidung')
+                    navigate('/admin/quanlykhoahoc/themkhoahoc')
                 }} >
-                    Thêm người dùng
+                    Thêm khóa học
                 </Button>
             </div>
 
@@ -214,4 +206,4 @@ const AdminQuanLyNguoiDung = () => {
     )
 }
 
-export default AdminQuanLyNguoiDung
+export default AdminQuanLyKhoaHoc

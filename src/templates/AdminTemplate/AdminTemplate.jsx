@@ -29,8 +29,6 @@ function getItem(label, key, icon, items) {
 }
 
 
-
-
 const AdminTemplate = () => {
 
     const [collapsed, setCollapsed] = useState(false);
@@ -66,10 +64,10 @@ const AdminTemplate = () => {
                 <Menu theme="dark" mode="inline" >
                     <SubMenu key='sub11' icon={<FolderOutlined />} title="Quản Lý Khóa Học">
                         <Menu.Item key='122' icon={<UserOutlined />}>
-                            <NavLink to='/admin/user'>Quản Lý Khóa Học</NavLink>
+                            <NavLink to='/admin/quanlykhoahoc'>Quản Lý Khóa Học</NavLink>
                         </Menu.Item>
                         <Menu.Item key='12' icon={<UserAddOutlined />}>
-                            <NavLink to='/admin/user/adduser'>Quản Lý Khóa Học</NavLink>
+                            <NavLink to='/admin/quanlykhoahoc/themkhoahoc'>Thêm Khóa Học</NavLink>
                         </Menu.Item>
                     </SubMenu>
                     <SubMenu key='sub12' icon={<FolderOutlined />} title="Quản Lý Người Dùng">

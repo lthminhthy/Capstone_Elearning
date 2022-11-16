@@ -15,6 +15,8 @@ import AdminTemplate from "../templates/AdminTemplate/AdminTemplate"
 import AdminQuanLyNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminQuanLyNguoiDung"
 import AdminThemNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminThemNguoiDung"
 import AdminChinhSuaNguoiDung from "../pages/Admin/AdminQuanLyNguoiDung/AdminChinhSuaNguoiDung"
+import AdminQuanLyKhoaHoc from "../pages/Admin/AdminQuanLyKhoaHoc/AdminQuanLyKhoaHoc"
+import AdminThemKhoaHoc from "../pages/Admin/AdminQuanLyKhoaHoc/AdminThemKhoaHoc"
 
 export const Router = () => {
     const routing = useRoutes([
@@ -94,7 +96,19 @@ export const Router = () => {
                     element: <AdminChinhSuaNguoiDung></AdminChinhSuaNguoiDung>
 
 
-                }
+                },
+                {
+                    path:'quanlykhoahoc',
+                    element: <AdminQuanLyKhoaHoc></AdminQuanLyKhoaHoc>
+
+
+                },
+                {
+                    path:'quanlykhoahoc/themkhoahoc',
+                    element: <AdminThemKhoaHoc></AdminThemKhoaHoc>
+
+
+                },
             ]
         }
         

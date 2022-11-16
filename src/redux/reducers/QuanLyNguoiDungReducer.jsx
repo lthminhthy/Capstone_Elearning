@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN, USER_LOGIN } from "../../util/settings/config";
-import { SET_DANG_NHAP, SET_MALOAI_USER, SET_NGUOIDUNG, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "../actions/types/QuanLyNguoiDungType";
+import { SET_DANG_NHAP, SET_DANHSACH_USER, SET_MALOAI_USER, SET_NGUOIDUNG, SET_THONGTIN_TAIKHOAN, SET_THONGTIN_TAIKHOAN_DEFAULT } from "../actions/types/QuanLyNguoiDungType";
 
 
 let user = {};
@@ -11,7 +11,8 @@ const stateDefault = {
     userLogin: user,
     thongTinTaiKhoanDefault:{},
     danhSachNguoiDung: [],
-    loaiND: []
+    loaiND: [],
+    danhsachUser:[]
    
 }
 
@@ -35,6 +36,10 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
         }
         case SET_MALOAI_USER:{
             state.loaiND = action.loaiND
+            return {...state}
+        }
+        case SET_DANHSACH_USER:{
+            state.danhsachUser = action.danhsachUser
             return {...state}
         }
        
