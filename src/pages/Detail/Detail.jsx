@@ -63,7 +63,7 @@ const Detail = () => {
 
                                         }).catch((error) => {
                                             console.log("errorDangKy: ", error.response?.data);
-                                            alert('Đăng ký thất bại! '  +error.response?.data )
+                                            alert('Đăng ký thất bại! '  + error.response?.data )
                                         })
                                     }} className="group flex items-center justify-between rounded-lg border border-retro-primary hover:border-retro-beige px-5 py-3 text-retro-primary  transition-colors bg-retro-beige focus:outline-none focus:ring hover:bg-retro-second active:bg-retro-secondfont-medium group-hover:text-retro-beige">Đăng ký
             
