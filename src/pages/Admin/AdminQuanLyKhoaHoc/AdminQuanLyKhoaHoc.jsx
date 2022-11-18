@@ -147,7 +147,7 @@ const AdminQuanLyKhoaHoc = () => {
                         <NavLink to={`/admin/quanlynguoidung/capnhat/${danhSachKhoaHocDefault.indexOf(KH)}`} className='hover:bg-yellow-500 bg-white border border-yellow-500 text-yellow-500 hover:text-white px-3 py-1.5  rounded-md mr-3 font-bold text-lg'><EditOutlined></EditOutlined></NavLink>
 
                         <span style={{ cursor: 'pointer' }} className='hover:bg-red-500  border border-red-500 text-red-500 hover:text-white px-3 py-1.5 rounded-md mr-3 font-bold text-lg' onClick={() => {
-                            if (window.confirm('Bạn có chắc muốn xóa khóa học ' + KH.taiKhoan + ' không?')) {
+                            if (window.confirm('Bạn có chắc muốn xóa khóa học ' + KH.tenKhoaHoc + ' không?')) {
                                 quanLyKhoaHocSerVice.xoaKhoaHoc(KH.maKhoaHoc).then((result) => {
                                     console.log("result: ", result);
                                     alert('Đã xóa khoá học thành công!')

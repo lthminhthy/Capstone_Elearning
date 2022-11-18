@@ -25,6 +25,7 @@ const AdminThemKhoaHoc = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [tenKH, setTenKH] = useState()
+    const [file, setFile] = useState()
     const { thongTinTaiKhoanDefault } = useSelector(state => state.QuanLyNguoiDungReducer)
     // console.log("thongTinTaiKhoanDefault: ", thongTinTaiKhoanDefault);
 
@@ -85,30 +86,57 @@ const AdminThemKhoaHoc = () => {
 
         onSubmit: (values) => {
             console.log("valuesubmit: ", values);
-            // values.hinhAnh="https://elearningnew.cybersoft.edu.vn/hinhanh/bc28-lap-trinh-full-stack_gp01.jpeg"
-            quanLyKhoaHocSerVice.themKhoaHoc(values).then((result) => {
-                console.log("result: ", result);
-                alert('Thêm khóa học thành công')
-                navigate('/admin/quanlykhoahoc')
 
+             quanLyKhoaHocSerVice.themKhoaHoc(values).then((result) => {
+                let frm = new FormData();
+                frm.append('file', file);
+                frm.append('tenKhoaHoc', tenKH);
+                quanLyKhoaHocSerVice.themKhoaHocUploadHinh(frm).then((result) => {
+                    console.log("resultUpload: ", result);
+                }).catch((error) => {
+                    console.log("error: ", error);
+                })
+             })
+            //     console.log("result: ", result);
 
-                // quanLyKhoaHocSerVice.uploadHinhAnhKhoaHoc().then((result) => {
-                //     console.log("result: ", result);
-                // }).catch((error) => {
-                //     console.log("error: ", error);
+           
+          
+            // alert('Thêm khóa học thành công')
+            // navigate('/admin/quanlykhoahoc')
 
-                // })
-            }).catch((error) => {
-                console.log("error: ", error);
-                alert('Thêm khóa học thất bại!')
-            })
-
-
+            // }).catch((error) => {
+            //     console.log("error: ", error);
+            //     alert('Thêm khóa học thất bại!')
+            // })
 
         }
     });
+    const handleChangeFile = (e) => {
 
+        let file = e.target.files[0];
+        setFile(file)
+        if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
+            // tao doi tuong doc file
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                setImgSrc(e.target.result)
+            }
+            formik.setFieldValue('hinhAnh', file.name)
+        }
 
+    }
+    const convertSelectNguoiTao = () => {
+        return danhsachUser?.map((user, index) => {
+
+            if (user.maLoaiNguoiDung = 'GV') {
+                // console.log("user: ", user);
+                return { label: user.taiKhoan, value: user.taiKhoan }
+            }
+
+        })
+
+    }
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
@@ -130,33 +158,10 @@ const AdminThemKhoaHoc = () => {
         formik.setFieldValue('tenKhoaHoc', values.target.value)
     }
 
-    const convertSelectNguoiTao = () => {
-        return danhsachUser?.map((user, index) => {
-
-            if (user.maLoaiNguoiDung = 'GV') {
-                console.log("user: ", user);
-                return { label: user.taiKhoan, value: user.taiKhoan }
-            }
-
-        })
-
-    }
 
 
-    const handleChangeFile = (e) => {
-     
-        let file = e.target.files[0];
-        if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
-            // tao doi tuong doc file
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (e) => {
-                setImgSrc(e.target.result)
-            }
 
-            //   formik.setFieldValue('hinhAnh', file)
-        }
-    }
+
 
     const onChangeDate = (values) => {
         formik.setFieldValue('ngayTao', moment(values).format('DD/MM/YYYY'))
