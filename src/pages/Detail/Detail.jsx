@@ -27,7 +27,7 @@ const Detail = () => {
 
     return (
         <Fragment>
-            <section className="flex flex-col justify-center antialiased bg-retro-beige text-gray-200 min-h-screen">
+            <section className="flex flex-col justify-center antialiased bg-retro-beige text-gray-200 min-h-screen w-full">
                 <div className="max-w-6xl mx-auto p-4 sm:px-6 h-full">
                     <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
                         <a className="relative block group" href="#0">
@@ -53,9 +53,9 @@ const Detail = () => {
                                 </h3>
                             </header>
                             <p className="text-lg text-retro-primary flex-grow">{thongTinKhoaHoc.moTa}</p>
-                            <footer className="flex items-center mt-4">
+                            <footer className="flex items-center mt-4 md:mb-0 mb-10">
 
-                                <div>
+                                <div className='mr-10 md:mr-0'>
                                     <button type='submit' onClick={() => {
                                         quanLyKhoaHocSerVice.dangKyKhoaHoc(thongTinDangKy).then((result) => {
                                             console.log("resultDangKy: ", result);
