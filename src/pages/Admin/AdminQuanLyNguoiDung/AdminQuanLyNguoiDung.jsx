@@ -128,29 +128,7 @@ const AdminQuanLyNguoiDung = () => {
             dataIndex: '',
             render: (text, user) => {
                 return <Fragment >
-                    <div className='text-center'>
-                        <button className='hover:bg-retro-primary bg-white border border-retro-primary text-retro-second hover:text-white px-1 py-1.5  rounded-md mr-3 font-semibold text-base' onClick={() => setOpen(true)}>Ghi danh</button>
-                        <Modal
-                            title="Modal 1000px width"
-                            centered
-                            open={open}
-                            onOk={() => setOpen(false)}
-                            onCancel={() => setOpen(false)}
-                            width={1000}
-                            maskStyle={{ backgroundColor: 'transparent', opacity: '0.1', boxShadow: 'none' }}
-                        >
-                            <p>Chọn khóa học</p>
-                            <Select mode="multiple" style={{ width: '50%' }}>
-                                <Select.Option value="jack">Jack</Select.Option>
-                                <Select.Option value="lucy">Lucy</Select.Option>
-                                <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                            </Select>
-
-
-                        </Modal>
-
-
-
+                    <div>
 
                         <NavLink to={`/admin/quanlynguoidung/capnhat/${danhSachNguoiDung.indexOf(user)}`} className='hover:bg-yellow-500 bg-white border border-yellow-500 text-yellow-500 hover:text-white px-3 py-1.5  rounded-md mr-3 font-bold text-lg'><EditOutlined></EditOutlined></NavLink>
 

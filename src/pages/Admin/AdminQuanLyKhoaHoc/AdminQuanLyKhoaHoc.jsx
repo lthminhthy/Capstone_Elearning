@@ -1,4 +1,3 @@
-
 import { Modal, Select, Table } from 'antd';
 import React, { Fragment, useState } from 'react';
 
@@ -23,6 +22,16 @@ const AdminQuanLyKhoaHoc = () => {
     const { danhSachKhoaHocDefault } = useSelector(state => state.QuanLyKhoaHocReducer);
     console.log("danhSachKhoaHocDefault: ", danhSachKhoaHocDefault);
     const [open, setOpen] = useState(false);
+    const [listUser, setListUser] = useState()
+    const [taiKhoan, setTaiKhoan] = useState()
+    const [xacThuc, setXacThuc] = useState()
+    const [daGhiDanh, setDaGhiDanh] = useState()
+    console.log("xacThuc: ", xacThuc);
+    const [maKH, setMaKH] = useState()
+    const data = danhSachKhoaHocDefault;
+
+
+
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -35,7 +44,225 @@ const AdminQuanLyKhoaHoc = () => {
         dispatch(layDanhSachKhoaHocAction(value))
     };
 
+    const changeUser = (e) => {
+        console.log("e: ", e);
+        setTaiKhoan(e)
+        // e.target.value
+    }
+    const onClickXacThuc = (text) => {
+        const objGhiDanh = {
+            
 
+            'maKhoaHoc': text
+        }
+        console.log('objGhiDanhtt', objGhiDanh)
+        const thongTinXacThuc = {
+            maKhoaHoc: maKH, taiKhoan: text
+        }
+        quanLyKhoaHocSerVice.ghiDanhKhoaHoc(thongTinXacThuc).then((result) => {
+            console.log("result: ", result);
+            alert('Đã xác thực cho ' + text + ' thành công!')
+            // listXacThuc(objGhiDanh)
+            
+
+        }).catch((error) => {
+            alert('Xác thực thất bại! ' + error.response?.data)
+        })
+        
+    }
+    const onClickHuyGhiDanh = (text) => {
+        console.log('hihi')
+        const thongTinHuy = {
+           
+            maKhoaHoc: maKH, taiKhoan: text
+            
+        } 
+        console.log("thongTinHuy: ", thongTinHuy);
+        quanLyKhoaHocSerVice.huyGhiDanh(thongTinHuy).then((result) => {
+            console.log("result: ", result);
+            alert('Đã hủy xác thực ' + text + ' thành công!')
+
+
+        }).catch((error) => {
+            alert('Hủy thất bại! ' + error.response?.data)
+        })
+        
+    }
+
+    const listDaGhiDanh = (objGhiDanh) => {
+       
+        quanLyNguoiDungService.layDanhSachHocVienKhoaHoc(objGhiDanh).then((result) => {
+            setDaGhiDanh(result.data)
+console.log('ttttt'+ result.data)
+
+        }).catch((err) => {
+            console.log("err: ", err);
+
+        })
+    }
+
+    const listXacThuc = (objGhiDanh) => {
+          quanLyNguoiDungService.layDanhSachHocVienChoXetDuyet(objGhiDanh).then((result) => {
+            console.log("resultXT: ", result.data);
+            setXacThuc(result.data)
+
+
+        }).catch((err) => {
+            console.log("err: ", err);
+
+        })
+    }
+    const listGhiDanh = (objGhiDanh) => {
+         quanLyNguoiDungService.layDanhSachNguoiDungChuaGhiDanh(objGhiDanh).then((result) => {
+            setListUser(result.data)
+
+        })
+            .catch((error) => {
+                console.log("errorGhiDanh: ", error);
+
+            })
+    }
+ 
+
+    const modalGhiDanh = (text) => {
+        console.log("text: ", text);
+        setOpen(true)
+        setMaKH(text)
+
+        const objGhiDanh = {
+
+            'maKhoaHoc': text
+        }
+        listGhiDanh(objGhiDanh)
+        listXacThuc(objGhiDanh)
+        listDaGhiDanh(objGhiDanh)
+
+       
+
+      
+    }
+
+
+    const columnsXacThuc = [
+
+
+        {
+            title: 'Tài khoản',
+            dataIndex: 'taiKhoan',
+            sorter: (a, b) => {
+                let taiKhoanA = a.taiKhoan.toLowerCase().trim();
+                let taiKhoanB = b.taiKhoan.toLowerCase().trim();
+                if (taiKhoanA < taiKhoanB) {
+                    return 1
+                }
+                return -1
+            },
+            width: "30%",
+            sortDirections: ['descend', 'ascend'],
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
+        },
+        {
+            title: 'Họ tên',
+            dataIndex: 'hoTen',
+            sorter: (a, b) => {
+                let hoTenA = a.hoTen.toLowerCase().trim();
+                let hoTenB = b.hoTen.toLowerCase().trim();
+                if (hoTenA < hoTenB) {
+                    return 1
+                }
+                return -1
+            },
+            width: "30%",
+            sortDirections: ['descend', 'ascend'],
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
+        },
+       
+        {
+            title: 'Chờ xác nhận',
+            dataIndex: '',
+            render: (text, KH) => {
+                console.log("textxeM: ", text);
+                return <Fragment >
+                    <div className=''>
+                        <button className='ml-5 px-3 py-1 border border-retro-primary rounded-md hover:text-retro-beige hover:bg-retro-primary' onClick={() => {
+                            onClickXacThuc(text.taiKhoan)
+                        }}>Xác thực</button>
+                        
+                        <button className='ml-5 px-3 py-1 border border-retro-primary rounded-md hover:text-retro-beige hover:bg-retro-primary' onClick={() => {
+                            onClickHuyGhiDanh(text.taiKhoan)
+                        }}>Hủy</button>
+                    </div>
+
+                </Fragment>
+
+            },
+            width: '40%',
+            sortDirections: ['descend', 'ascend'],
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
+        },
+    ];
+    const columnsThamGia = [
+        {
+            title: 'Tài khoản',
+            dataIndex: 'taiKhoan',
+            sorter: (a, b) => {
+                let taiKhoanA = a.taiKhoan.toLowerCase().trim();
+                let taiKhoanB = b.taiKhoan.toLowerCase().trim();
+                if (taiKhoanA < taiKhoanB) {
+                    return 1
+                }
+                return -1
+            },
+            width: "30%",
+            sortDirections: ['descend', 'ascend'],
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
+        },
+        {
+            title: 'Họ tên',
+            dataIndex: 'hoTen',
+            sorter: (a, b) => {
+                let hoTenA = a.hoTen.toLowerCase().trim();
+                let hoTenB = b.hoTen.toLowerCase().trim();
+                if (hoTenA < hoTenB) {
+                    return 1
+                }
+                return -1
+            },
+            width: "30%",
+            sortDirections: ['descend', 'ascend'],
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
+        },
+       
+        {
+            title: 'Chờ xác nhận',
+            dataIndex: '',
+            render: (text, KH) => {
+                console.log("textxeM: ", text);
+                return <Fragment >
+                    <div className=''>
+                    <button className='ml-5 px-3 py-1 border border-retro-primary rounded-md hover:text-retro-beige hover:bg-retro-primary' onClick={() => {
+                            onClickHuyGhiDanh(text.taiKhoan)
+                        }}>Hủy</button>
+                        
+                    </div>
+
+                </Fragment>
+
+            },
+            width: '40%',
+            sortDirections: ['descend', 'ascend'],
+
+            onFilter: (value, record) => record.address.indexOf(value) === 0,
+        },
+
+
+
+    ];
     const columns = [
 
         {
@@ -121,9 +348,9 @@ const AdminQuanLyKhoaHoc = () => {
             render: (text, KH) => {
                 return <Fragment >
                     <div className='text-center'>
-                        <button className='hover:bg-retro-primary bg-white border border-retro-primary text-retro-second hover:text-white px-1 py-1.5  rounded-md mr-3 font-semibold text-base' onClick={() => setOpen(true)}>Ghi danh</button>
+                        <button className='hover:bg-retro-primary bg-white border border-retro-primary text-retro-second hover:text-white px-1 py-1.5  rounded-md mr-3 font-semibold text-base' onClick={() => modalGhiDanh(text.maKhoaHoc)}>Ghi danh</button>
                         <Modal
-                            title="Modal 1000px width"
+                            title=""
                             centered
                             open={open}
                             onOk={() => setOpen(false)}
@@ -131,12 +358,38 @@ const AdminQuanLyKhoaHoc = () => {
                             width={1000}
                             maskStyle={{ backgroundColor: 'transparent', opacity: '0.1', boxShadow: 'none' }}
                         >
-                            <p>Chọn khóa học</p>
-                            <Select mode="multiple" style={{ width: '50%' }}>
-                                <Select.Option value="jack">Jack</Select.Option>
-                                <Select.Option value="lucy">Lucy</Select.Option>
-                                <Select.Option value="Yiminghe">yiminghe</Select.Option>
-                            </Select>
+                            <div className='popup'>
+                                <p className='text-lg font-bold'>Chọn khóa học</p>
+                                <div className='flex justify-start items-center'>
+                                    <Select placeholder='Chọn họ tên người dùng' mode="" style={{ width: '50%' }} onChange={changeUser}>
+
+                                        {listUser?.map((user, index) => {
+                                            return <Select.Option key={index} value={user.taiKhoan}>{user.hoTen}</Select.Option>
+                                        })}
+
+                                    </Select>
+                                    <button className='ml-5 px-3 py-1 border border-retro-primary rounded-md' onClick={() => {
+                                        const thongTinDangKy = {
+                                            maKhoaHoc: text.maKhoaHoc, taiKhoan: taiKhoan
+                                        }
+                                        quanLyKhoaHocSerVice.dangKyKhoaHoc(thongTinDangKy).then((result) => {
+                                            alert('Đã ghi danh cho ' + taiKhoan + ' thành công!')
+
+                                        }).catch((error) => {
+                                            alert('Đăng ký thất bại! ' + error.response?.data)
+                                        })
+                                    }}>Ghi danh</button>
+                                </div>
+                                <hr className='my-5' />
+
+                                <p className='text-lg font-bold'>Học viên chờ xác thực</p>
+                                <Table className='mt-5 px-16' dataSource={xacThuc} columns={columnsXacThuc} onChange={onChange} rowKey={"taiKhoan"}></Table>
+                                <hr className='my-5' />
+                                <p className='text-lg font-bold'>Học viên đã tham gia khóa học</p>
+                                <Table className='mt-5 px-16 ' dataSource={daGhiDanh} columns={columnsThamGia} onChange={onChange} rowKey={"taiKhoan"}></Table>
+
+                            </div>
+
 
 
                         </Modal>
@@ -174,8 +427,7 @@ const AdminQuanLyKhoaHoc = () => {
             onFilter: (value, record) => record.address.indexOf(value) === 0,
         },
     ];
-    const data = danhSachKhoaHocDefault
-    ;
+
     const onChange = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
     };
