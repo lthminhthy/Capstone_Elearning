@@ -27,7 +27,7 @@ const Detail = () => {
 
     return (
         <Fragment>
-            <section className="flex flex-col justify-center antialiased bg-retro-beige text-gray-200 min-h-screen">
+            <section className="flex flex-col justify-center antialiased bg-retro-beige text-gray-200 min-h-screen w-full">
                 <div className="max-w-6xl mx-auto p-4 sm:px-6 h-full">
                     <article className="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
                         <a className="relative block group" href="#0">
@@ -53,17 +53,17 @@ const Detail = () => {
                                 </h3>
                             </header>
                             <p className="text-lg text-retro-primary flex-grow">{thongTinKhoaHoc.moTa}</p>
-                            <footer className="flex items-center mt-4">
+                            <footer className="flex items-center mt-4 md:mb-0 mb-10">
 
-                                <div>
+                                <div className='mr-10 md:mr-0'>
                                     <button type='submit' onClick={() => {
                                         quanLyKhoaHocSerVice.dangKyKhoaHoc(thongTinDangKy).then((result) => {
                                             console.log("resultDangKy: ", result);
                                             alert('Đăng ký khóa học thành công!')
 
                                         }).catch((error) => {
-                                            console.log("errorDangKy: ", error.s);
-                                            alert('Đăng ký thất bại!')
+                                            console.log("errorDangKy: ", error.response?.data);
+                                            alert('Đăng ký thất bại! '  + error.response?.data )
                                         })
                                     }} className="group flex items-center justify-between rounded-lg border border-retro-primary hover:border-retro-beige px-5 py-3 text-retro-primary  transition-colors bg-retro-beige focus:outline-none focus:ring hover:bg-retro-second active:bg-retro-secondfont-medium group-hover:text-retro-beige">Đăng ký
             

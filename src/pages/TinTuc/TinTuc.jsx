@@ -26,7 +26,7 @@ const TinTuc = () => {
                             CYBERSOFT
                         </p>
                         <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-                            Giới thiệu
+                            Giới thiệu {' '}
                             <br className="hidden md:block" />
                             về{' '}
                             <span className="inline-block text-deep-purple-accent-400">
@@ -55,7 +55,7 @@ const TinTuc = () => {
                 </div>
             </div>
 
-            <section className="m-4 md:m-8 dark:bg-gray-800 dark:text-gray-100">
+            <section className="m-4 md:m-8 dark:text-gray-100">
                 <div className="container mx-auto p-4 mb-6 mt-16 space-y-2 text-center">
                     <h2 className="text-5xl font-bold">Điểm ưu việt chỉ có tại CyberSoft</h2>
                 </div>
