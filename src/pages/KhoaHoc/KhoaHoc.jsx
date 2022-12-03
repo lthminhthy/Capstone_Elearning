@@ -18,7 +18,7 @@ const KhoaHoc = () => {
                     danhSachKhoaHocAll?.slice(0, 9).map((khoaHoc, index) => {
                         return <div key={index} className="my-4 mx-2 bg-white shadow-md border border-gray-200 rounded-lg max-w-sm  w-full">
                             <div className=' w-full h-60'>
-                                <img className="rounded-t-lg h-full w-full" src={khoaHoc.hinhAnh} alt />
+                                <img className="rounded-t-lg h-full w-full min-w-100" src={khoaHoc.hinhAnh} alt />
                             </div>
 
                             <div className="p-5 w-full ">
