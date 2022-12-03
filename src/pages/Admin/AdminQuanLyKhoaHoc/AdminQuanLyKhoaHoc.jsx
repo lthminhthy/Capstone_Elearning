@@ -435,7 +435,7 @@ console.log('ttttt'+ result.data)
 
     return (
         <div className='container'>
-            <h2 className='lg:text-lg text-base mb-5'>Quản Lý Khóa Học</h2>
+            <h2 className='lg:text-lg text-base mb-5'>Quản Lý Khóa Học </h2>
             <div className='flex justify-between items-center'>
                 <Space direction="vertical" className='w-screen'>
 
@@ -445,7 +445,7 @@ console.log('ttttt'+ result.data)
                 <Button className='w-48' type="primary" shape="round" size="large" onClick={() => {
                     navigate('/admin/quanlykhoahoc/themkhoahoc')
                 }} >
-                    Thêm khóa học
+                    Thêm Khóa Học
                 </Button>
             </div>
 
