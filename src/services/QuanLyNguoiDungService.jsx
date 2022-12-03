@@ -1,4 +1,3 @@
-
 import { GROUPID } from "../util/settings/config";
 import { baseService } from "./baseService";
 
@@ -30,6 +29,11 @@ export class QuanLyNguoiDungService extends baseService {
     layDanhSachLoaiNguoiDung = () => {
         return this.get(`/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung`)
     }
+    layDanhSachNguoiDung = () => {
+        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`)
+    }
+
+    
     timKiemNguoiDungTheoTen = (thongTin = '') => {
         if (thongTin.trim() != '') {
             return this.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUPID}&tuKhoa=${thongTin}`)
@@ -37,8 +41,18 @@ export class QuanLyNguoiDungService extends baseService {
         return this.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUPID}`)
 
     }
+    layDanhSachNguoiDungChuaGhiDanh = (maKhoaHoc) => {
+        console.log("maKhoaHoc: ", maKhoaHoc);
+        return this.post(`/api/QuanLyNguoiDung/LayDanhSachNguoiDungChuaGhiDanh`,maKhoaHoc)
+    }
+    layDanhSachHocVienChoXetDuyet = (maKhoaHoc) => {
+        return this.post(`/api/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet`,maKhoaHoc)
+    }
+    layDanhSachHocVienKhoaHoc = (maKhoaHoc) => {
+        return this.post(`/api/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc`,maKhoaHoc)
+    }
+   
    
 }
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService
-

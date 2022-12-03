@@ -29,11 +29,25 @@ export class QuanLyKhoaHocService extends baseService{
     huyKhoaHoc = (thongTinHuyDangKy) => {
         return this.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`,thongTinHuyDangKy)
     }
-
+    themKhoaHoc = (thongTinKhoaHoc) => {
+        return this.post(`/api/QuanLyKhoaHoc/ThemKhoaHoc`,thongTinKhoaHoc)
+    }
+    xoaKhoaHoc = (maKhoaHoc) => {
+        return this.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`)
+    } 
+    themKhoaHocUploadHinh = (frm) => {
+        return this.post(`/api/QuanLyKhoaHoc/UploadHinhAnhKhoaHoc`,frm)
+    }
+    ghiDanhKhoaHoc = (thongTinXacThuc) => {
+        return this.post(`/api/QuanLyKhoaHoc/GhiDanhKhoaHoc`,thongTinXacThuc)
+    }
+    huyGhiDanh = (thongTinHuy) => {
+        return this.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`,thongTinHuy)
+    }
+    
 
 
 
 }
 
 export const quanLyKhoaHocSerVice = new QuanLyKhoaHocService
-
