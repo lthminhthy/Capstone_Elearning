@@ -242,7 +242,6 @@ console.log('ttttt'+ result.data)
             title: 'Chờ xác nhận',
             dataIndex: '',
             render: (text, KH) => {
-                console.log("textxeM: ", text);
                 return <Fragment >
                     <div className=''>
                     <button className='ml-5 px-3 py-1 border border-retro-primary rounded-md hover:text-retro-beige hover:bg-retro-primary' onClick={() => {

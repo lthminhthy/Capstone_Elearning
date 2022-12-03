@@ -38,7 +38,12 @@ export class QuanLyKhoaHocService extends baseService{
     themKhoaHocUploadHinh = (frm) => {
         return this.post(`/api/QuanLyKhoaHoc/UploadHinhAnhKhoaHoc`,frm)
     }
-    
+    ghiDanhKhoaHoc = (thongTinXacThuc) => {
+        return this.post(`/api/QuanLyKhoaHoc/GhiDanhKhoaHoc`,thongTinXacThuc)
+    }
+    huyGhiDanh = (thongTinHuy) => {
+        return this.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`,thongTinHuy)
+    }
 
 
 
