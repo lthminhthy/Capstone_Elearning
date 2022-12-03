@@ -30,11 +30,6 @@ export class QuanLyNguoiDungService extends baseService {
     layDanhSachLoaiNguoiDung = () => {
         return this.get(`/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung`)
     }
-    layDanhSachNguoiDung = () => {
-        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`)
-    }
-
-    
     timKiemNguoiDungTheoTen = (thongTin = '') => {
         if (thongTin.trim() != '') {
             return this.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUPID}&tuKhoa=${thongTin}`)

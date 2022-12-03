@@ -32,7 +32,7 @@ const Home = () => {
               Trở thành lập trình viên chuyên nghiệp tại CyberSoft
             </p>
             <div className="mt-8 mb-5 flex flex-wrap gap-4 text-center">
-              <NavLink to="/khoahoc" className="mx-4 mb-5 block w-full rounded bg-retro-second px-12 py-3 text-sm font-medium text-retro-beige shadow hover:bg-retro-third hover:text-retro-primary focus:outline-none focus:ring active:bg-retro-second sm:w-auto xl:mr-5">
+              <NavLink to="/khoahoc" className="mb-5 block w-full rounded bg-retro-second px-12 py-3 text-sm font-medium text-retro-beige shadow hover:bg-retro-third hover:text-retro-primary focus:outline-none focus:ring active:bg-retro-second sm:w-auto xl:mr-5">
                 Xem Khóa Học
               </NavLink>
               <a href="https://www.facebook.com/lophocviet/" className="mb-5 block w-full rounded bg-retro-third px-12 py-3 text-sm font-medium text-retro-primary shadow hover:text-retro-beige hover:bg-retro-second focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
@@ -46,11 +46,11 @@ const Home = () => {
       <section className="py-6 bg-retro-beige z-10">
         <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
           <h1 className="text-3xl font-bold leading-none text-center sm:text-4xl text-retro-primary">Các Khóa Học Mới</h1>
-          <div className="flex flex-row flex-wrap justify-center mt-8 gap-5 ">
+          <div className="flex flex-row flex-wrap justify-center mt-8 gap-5">
 
             {
               danhSachKhoaHocDefault?.slice(0, 9).map((khoaHoc, index) => {
-                return <div key={index} className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 w-full my-4 mx-2">
+                return <div key={index} className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
                   <div className=' w-full h-60'>
                       <img className="rounded-t-lg h-full w-full" src={khoaHoc.hinhAnh} alt />
                   </div>

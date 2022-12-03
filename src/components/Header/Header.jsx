@@ -117,7 +117,7 @@ const Header = () => {
                 </NavLink>
 
               </div>
-              <div className="hidden lg:block">
+              <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
 
 
@@ -127,20 +127,20 @@ const Header = () => {
                 </div>
 
               </div>
-              <div className="hidden lg:block">
+              <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <NavLink to='/tintuc' className='text-retro-beige hover:text-retro-third'>Tin Tức</NavLink>
                 </div>
 
               </div>
-              <div className="hidden lg:block">
+              <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <NavLink to='lienhe' className='text-retro-beige hover:text-retro-third'>Liên Hệ</NavLink>
                 </div>
 
               </div>
             </div>
-            <div className=' items-center justify-between lg:flex hidden '>
+            <div className=' items-center justify-between md:flex hidden'>
               <div className="relative mx-auto text-retro-primary ">
                 <Space direction="vertical" >
                   <Search
@@ -154,12 +154,12 @@ const Header = () => {
                 </Space>
 
               </div>
-              <div className="items-center flex-shrink-0  lg:flex hidden ml-20 ">
+              <div className="items-center flex-shrink-0  flex ml-20">
                 {renderLogin()}
               </div>
             </div>
 
-            <div className="-mr-2 flex lg:hidden">
+            <div className="-mr-2 flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -216,7 +216,7 @@ const Header = () => {
           leaveTo="opacity-0 scale-95"
         >
           {(ref) => (
-            <div className="lg:hidden h-[300px]" id="mobile-menu">
+            <div className="md:hidden h-[300px]" id="mobile-menu">
               <div ref={ref} className="py-4 pb-3 space-y-1 sm:px-3 text-right">
 
                 <MenuHeader className='ml-2 my-10'></MenuHeader>

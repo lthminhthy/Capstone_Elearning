@@ -40,6 +40,8 @@ const Profile = () => {
         const found = list.find(element => element.tenKhoaHoc.toLowerCase() == value.toLowerCase())
 
 
+
+
         if (found === undefined) {
             alert('Không tìm thấy khóa học')
             setList(khoaHoc)
