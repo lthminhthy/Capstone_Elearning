@@ -31,7 +31,6 @@ const AdminThemKhoaHoc = () => {
 
     const { danhMucKhoaHoc } = useSelector(state => state.QuanLyKhoaHocReducer)
     const { danhsachUser } = useSelector(state => state.QuanLyNguoiDungReducer)
-    // console.log("danhsachUser: ", danhsachUser);
     const [imgSrc, setImgSrc] = useState('');
 
 
@@ -67,22 +66,22 @@ const AdminThemKhoaHoc = () => {
             taiKhoanNguoiTao: '',
 
         },
-        // validationSchema: Yup.object({
-        //     taiKhoan: Yup.string()
-        //         .min(3, "Mininum 3 characters")
-        //         .required("Vui lòng nhập tài khoản!"),
-        //     matKhau: Yup.string()
-        //         .min(4, "Mininum 4 characters")
-        //         .required("Vui lòng nhập mật khẩu!"),
-        //     email: Yup.string()
-        //         .required("Vui lòng nhập email!"),
-        //     soDT: Yup.string()
-        //         .required("Vui lòng nhập số điện thoại!"),
-        //     hoTen: Yup.string()
-        //         .required("Vui lòng nhập họ tên!"),
-        //     maLoaiNguoiDung: Yup.string()
-        //         .required("Chọn loại người dùng!"),
-        // }),
+        validationSchema: Yup.object({
+            taiKhoan: Yup.string()
+                .min(3, "Mininum 3 characters")
+                .required("Vui lòng nhập tài khoản!"),
+            matKhau: Yup.string()
+                .min(4, "Mininum 4 characters")
+                .required("Vui lòng nhập mật khẩu!"),
+            email: Yup.string()
+                .required("Vui lòng nhập email!"),
+            soDT: Yup.string()
+                .required("Vui lòng nhập số điện thoại!"),
+            hoTen: Yup.string()
+                .required("Vui lòng nhập họ tên!"),
+            maLoaiNguoiDung: Yup.string()
+                .required("Chọn loại người dùng!"),
+        }),
 
         onSubmit: (values) => {
             console.log("valuesubmit: ", values);
@@ -97,18 +96,7 @@ const AdminThemKhoaHoc = () => {
                     console.log("error: ", error);
                 })
              })
-            //     console.log("result: ", result);
-
-           
-          
-            // alert('Thêm khóa học thành công')
-            // navigate('/admin/quanlykhoahoc')
-
-            // }).catch((error) => {
-            //     console.log("error: ", error);
-            //     alert('Thêm khóa học thất bại!')
-            // })
-
+         
         }
     });
     const handleChangeFile = (e) => {
@@ -194,7 +182,7 @@ const AdminThemKhoaHoc = () => {
                 size={componentSize}
 
             >
-                <h2 className='text-xl mb-5'>Thêm Người Dùng</h2>
+                <h2 className='text-xl mb-5'>Thêm Khóa Học</h2>
                 <Form.Item label="Form Size" name="size">
                     <Radio.Group>
                         <Radio.Button value="small">Small</Radio.Button>
@@ -204,15 +192,15 @@ const AdminThemKhoaHoc = () => {
                 </Form.Item>
                 <Form.Item label="Mã khóa học">
                     <Input name='maKhoaHoc' onChange={formik.handleChange} />
-                    {/* {formik.errors.hoTen && formik.touched.hoTen && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.hoTen}</p>
-                    )} */}
+                    {formik.errors.maKhoaHoc && formik.touched.maKhoaHoc && (
+                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.maKhoaHoc}</p>
+                    )}
                 </Form.Item>
                 <Form.Item label="Tên khóa học">
                     <Input name='tenKhoaHoc' onChange={handleChangeTenKH} />
-                    {/* {formik.errors.taiKhoan && formik.touched.taiKhoan && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.taiKhoan}</p>
-                    )} */}
+                    {formik.errors.tenKhoaHoc && formik.touched.tenKhoaHoc && (
+                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.tenKhoaHoc}</p>
+                    )}
                 </Form.Item>
                 <Form.Item label="Danh mục khóa học:" name='maDanhMucKhoaHoc'>
                     <Select name='maDanhMucKhoaHoc'
@@ -221,33 +209,19 @@ const AdminThemKhoaHoc = () => {
                         onChange={handleChangeKH}
 
                     />
-                    {/* {formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.maLoaiNguoiDung}</p>
-                    )} */}
 
                 </Form.Item>
                 <Form.Item label="Ngày tạo">
                     <DatePicker format='DD/MM/YYYY' onOk={onOk} onChange={onChangeDate} />
-                    {/* {formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.ngayChieuGioChieu}</p>
-                    )} */}
-
-                    {/* <Input name='ngayTao' onChange={formik.handleChange} /> */}
-                    {/* {formik.errors.matKhau && formik.touched.matKhau && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.trailer}</p>
-                    )} */}
+                  
                 </Form.Item>
                 <Form.Item label="Đánh giá">
                     <Input type='number' name='danhGia' onChange={formik.handleChange} />
-                    {/* {formik.errors.email && formik.touched.email && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.email}</p>
-                    )} */}
+                   
                 </Form.Item>
                 <Form.Item label="Lượt xem">
                     <Input type='number' name='luotXem' onChange={formik.handleChange} />
-                    {/* {formik.errors.soDT && formik.touched.soDT && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.soDT}</p>
-                    )} */}
+                  
                 </Form.Item>
                 <Form.Item label="Người tạo:" name='taiKhoanNguoiTao'>
                     <Select name='taiKhoanNguoiTao'
@@ -256,9 +230,7 @@ const AdminThemKhoaHoc = () => {
                         onChange={handleChangeNguoiTao}
 
                     />
-                    {/* {formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.maLoaiNguoiDung}</p>
-                    )} */}
+                 
 
                 </Form.Item>
                 <Form.Item label="Hình Ảnh">
@@ -268,40 +240,17 @@ const AdminThemKhoaHoc = () => {
                             <br />
                             <img style={{ width: 50, height: 50 }} src={imgSrc} alt="." />
                         </div>
-                        {/* <div>
-                            <button className='px-3 py-1 bg-retro-third rounded-lg' onClick={() => {
-                                quanLyKhoaHocSerVice.uploadHinhAnhKhoaHoc().then((result) => {
-                                    console.log("result: ", result);
-
-                                }).catch((error) => {
-                                    console.log("error: ", error);
-
-                                })
-                            }}>Upload</button>
-
-                        </div> */}
+                       
 
                     </div>
 
 
-                    {/* <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-md shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-retro-primary">
-
-                        <input className='hidden' type="file" onChange={handleChangeFile} accept='image/jpg, image/jpeg, image/png' />
-                        <img style={{ width: 50, height: 50 }} src={imgSrc} alt="." />
-                        <hr />
-                        <button className=''>Upload</button>
-                    </label> */}
 
                 </Form.Item>
                 <Form.Item label="Mô tả">
                     <Input name='moTa' onChange={formik.handleChange} />
-                    {/* {formik.errors.soDT && formik.touched.soDT && (
-                        <p className='text-red-500 mb-0 text-sm'>{formik.errors.soDT}</p>
-                    )} */}
+                
                 </Form.Item>
-
-
-
 
 
                 <div className='text-center'>
